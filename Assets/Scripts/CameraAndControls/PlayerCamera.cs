@@ -4,21 +4,22 @@ namespace ProjectPipe
 {
     public class PlayerCamera : MonoBehaviour
     {
+        [field: SerializeField] public PlayerManager PlayerManager { get; set; }
+        [field: SerializeField] public Camera CameraObject { get; set; }
+
+        [Header("Camera Values")]
         [SerializeField] private Transform cameraPivotTransform;
         [SerializeField] private float horizontalLookAngle;
         [SerializeField] private float verticalLookAngle;
 
+        [Header("Camera Settings")]
         [SerializeField] private LayerMask collisionLayer;
         [SerializeField] private float cameraCollisionRadius = 0.2f;
         [SerializeField] private float cameraSmoothSpeed = 0.025f;
-
         [SerializeField] private float horizontalRotationSpeed = 220f;
         [SerializeField] private float maximumPivotAngle = 60f;
         [SerializeField] private float minimumPivotAngle = -35f;
         [SerializeField] private float verticalRotationSpeed = 220f;
-
-        [field: SerializeField] public PlayerManager PlayerManager { get; set; }
-        [field: SerializeField] public Camera CameraObject { get; set; }
 
         private Vector3 _cameraObjectPosition;
         private Vector3 _cameraVelocity;

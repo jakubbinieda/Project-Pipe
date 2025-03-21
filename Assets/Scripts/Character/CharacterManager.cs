@@ -4,6 +4,7 @@ namespace ProjectPipe
 {
     public class CharacterManager : MonoBehaviour
     {
+        [field: Header("Flags")]
         [field: SerializeField] public bool ApplyRootMotion { get; set; }
         [field: SerializeField] public bool CanRotate { get; set; } = true;
         [field: SerializeField] public bool CanMove { get; set; } = true;

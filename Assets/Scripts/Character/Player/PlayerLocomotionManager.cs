@@ -4,6 +4,7 @@ namespace ProjectPipe
 {
     public class PlayerLocomotionManager : CharacterLocomotionManager
     {
+        [Header("Locomotion Settings")]
         [SerializeField] private float walkSpeed = 1.5f;
         [SerializeField] private float runSpeed = 4.5f;
         [SerializeField] private float sprintSpeed = 7f;

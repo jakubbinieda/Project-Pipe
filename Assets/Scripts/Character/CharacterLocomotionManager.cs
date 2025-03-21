@@ -4,6 +4,7 @@ namespace ProjectPipe
 {
     public class CharacterLocomotionManager : MonoBehaviour
     {
+        [Header("Fall Settings")]
         [SerializeField] protected Vector3 yVelocity;
         [SerializeField] protected float fallStartVelocity = -5f;
         [SerializeField] protected float gravityForce = -9.81f;
