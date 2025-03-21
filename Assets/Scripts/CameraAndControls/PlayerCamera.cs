@@ -42,8 +42,11 @@ namespace ProjectPipe
 
         private void Start()
         {
-            Cursor.visible = false; // TODO: Move somewhere else
             _cameraZPosition = CameraObject.transform.localPosition.z;
+
+            // TODO: Move somewhere else
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void LateUpdate()
