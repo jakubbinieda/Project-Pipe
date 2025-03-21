@@ -45,20 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806da8bd6898b44d59323fa309cc6399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <PlayerManager>k__BackingField: {fileID: 0}
+  <CameraObject>k__BackingField: {fileID: 1640120186069785770}
   cameraPivotTransform: {fileID: 2075896198414028151}
   horizontalLookAngle: 0
   verticalLookAngle: 0
-  cameraCollisionRadius: 0.2
-  cameraSmoothSpeed: 0.025
   collisionLayer:
     serializedVersion: 2
     m_Bits: 1
+  cameraCollisionRadius: 0.2
+  cameraSmoothSpeed: 0.025
   horizontalRotationSpeed: 220
   maximumPivotAngle: 60
   minimumPivotAngle: -35
   verticalRotationSpeed: 220
-  <PlayerManager>k__BackingField: {fileID: 0}
-  <CameraObject>k__BackingField: {fileID: 1640120186069785770}
 --- !u!1 &6046666373127708258
 GameObject:
   m_ObjectHideFlags: 0
