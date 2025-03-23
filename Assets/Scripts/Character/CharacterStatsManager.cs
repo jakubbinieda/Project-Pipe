@@ -5,6 +5,8 @@ namespace ProjectPipe
     public class CharacterStatsManager : MonoBehaviour
     {
         [field: Header("Health & Stamina")]
+        [SerializeField] private Observable<int> currentHealth = new(0);
+        [SerializeField] private Observable<int> maxHealth = new(0);
         [SerializeField] private Observable<float> currentStamina = new(0);
         [SerializeField] private Observable<float> maxStamina = new(0);
         [SerializeField] private float staminaRegenerationAmount = 2;
@@ -67,6 +69,12 @@ namespace ProjectPipe
         {
             maxStamina.Value = value;
             currentStamina.Value = value;
+        }
+
+        public void SetMaxHealth(int value)
+        {
+            maxHealth.Value = value;
+            currentHealth.Value = value;
         }
     }
 }

@@ -23,6 +23,7 @@ namespace ProjectPipe
 
             // TODO: Think of something better
             PlayerStatsManager.SetMaxStamina(100);
+            PlayerStatsManager.SetMaxHealth(100);
         }
     }
 }
