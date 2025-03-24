@@ -20,6 +20,7 @@ namespace ProjectPipe
         {
             _characterManager = GetComponent<CharacterManager>();
             currentStamina.OnValueChanged += ResetStaminaRegenerationTimer;
+            currentHealth.OnValueChanged += CheckHP;
         }
 
         protected void Update()
@@ -55,6 +56,13 @@ namespace ProjectPipe
             _staminaRegenerationTimer = 0;
         }
 
+        private void CheckHP(int oldValue, int newValue)
+        {
+            if (newValue > 0) return;
+
+            StartCoroutine(_characterManager.ProcessDeathEvent());
+        }
+
         public bool CanAffordStaminaCost(float cost)
         {
             return currentStamina.Value >= cost;
@@ -63,6 +71,11 @@ namespace ProjectPipe
         public void SpendStamina(float cost)
         {
             currentStamina.Value -= cost;
+        }
+
+        public void ReduceHealth(int damage)
+        {
+            currentHealth.Value -= damage;
         }
 
         public void SetMaxStamina(float value)
