@@ -39,6 +39,7 @@ public class Observable<T>
     }
 }
 
+#if UNITY_EDITOR
 // This is responsible for how Observable is displayed in the inspector
 [CustomPropertyDrawer(typeof(Observable<>))]
 public class ObservablePropertyDrawer : PropertyDrawer
@@ -72,3 +73,4 @@ public class ObservablePropertyDrawer : PropertyDrawer
         EditorGUI.EndProperty();
     }
 }
+#endif
