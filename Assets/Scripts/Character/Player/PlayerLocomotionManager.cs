@@ -13,6 +13,11 @@ namespace ProjectPipe
         [SerializeField] private float jumpForwardSpeed = 6.5f;
         [SerializeField] private float freeFallSpeed = 1.5f;
 
+        [Header("Locomotion Stamina Costs")]
+        [SerializeField] private int sprintStaminaCost = 2;
+        [SerializeField] private int jumpStaminaCost = 15;
+        [SerializeField] private int dodgeStaminaCost = 15;
+
         private Vector3 _jumpDirection;
         private float _moveAmount;
         private PlayerManager _playerManager;
@@ -49,10 +54,13 @@ namespace ProjectPipe
         {
             if (!_playerManager.CanMove) return;
 
-            if (_playerManager.IsPerformingAction) _playerManager.IsSprinting = false;
-
             _playerManager.IsSprinting = PlayerInputManager.Instance.MovementInput.magnitude != 0 &&
                                          PlayerInputManager.Instance.SprintInput;
+
+            if (_playerManager.IsPerformingAction) _playerManager.IsSprinting = false;
+
+            if (!_playerManager.PlayerStatsManager.CanAffordStaminaCost(sprintStaminaCost * Time.deltaTime))
+                _playerManager.IsSprinting = false;
 
             var moveDirection = PlayerCamera.Instance.transform.forward * PlayerInputManager.Instance.MovementInput.y;
             moveDirection += PlayerCamera.Instance.transform.right * PlayerInputManager.Instance.MovementInput.x;
@@ -67,6 +75,7 @@ namespace ProjectPipe
             {
                 _playerManager.CharacterController.Move(sprintSpeed * Time.deltaTime * moveDirection);
                 _moveAmount = 2;
+                _playerManager.PlayerStatsManager.SpendStamina(sprintStaminaCost * Time.deltaTime);
             }
             else if (_moveAmount > 0.5)
             {
@@ -121,6 +130,8 @@ namespace ProjectPipe
 
             if (!_playerManager.IsGrounded) return;
 
+            if (!_playerManager.PlayerStatsManager.CanAffordStaminaCost(dodgeStaminaCost)) return;
+
             if (PlayerInputManager.Instance.MovementInput.magnitude > 0)
             {
                 // Roll
@@ -142,6 +153,8 @@ namespace ProjectPipe
                 // Backstep
                 _playerManager.PlayerAnimatorManager.PlayTargetAnimation("Backstep_01", true, true);
             }
+
+            _playerManager.PlayerStatsManager.SpendStamina(dodgeStaminaCost);
         }
 
         private void AttemptToJump()
@@ -151,6 +164,8 @@ namespace ProjectPipe
             if (_playerManager.IsJumping) return;
 
             if (!_playerManager.IsGrounded) return;
+
+            if (!_playerManager.PlayerStatsManager.CanAffordStaminaCost(jumpStaminaCost)) return;
 
             _jumpDirection = PlayerCamera.Instance.CameraObject.transform.forward *
                              PlayerInputManager.Instance.MovementInput.y;
@@ -167,6 +182,8 @@ namespace ProjectPipe
 
             _playerManager.PlayerAnimatorManager.PlayTargetAnimation("Main_Jump_Start_01", false, true);
             _playerManager.IsJumping = true;
+
+            _playerManager.PlayerStatsManager.SpendStamina(jumpStaminaCost);
         }
 
         public void UpdateJumpVelocity()
