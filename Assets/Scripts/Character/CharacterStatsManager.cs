@@ -19,8 +19,19 @@ namespace ProjectPipe
         protected virtual void Awake()
         {
             _characterManager = GetComponent<CharacterManager>();
+        }
+
+        protected void Start()
+        {
+            var hud = PlayerUIManager.Instance.PlayerUIHudManager;
+
             currentStamina.OnValueChanged += ResetStaminaRegenerationTimer;
+            maxStamina.OnValueChanged += hud.SetMaxStaminaValue;
+            currentStamina.OnValueChanged += hud.SetNewStaminaValue;
+
             currentHealth.OnValueChanged += CheckHP;
+            maxHealth.OnValueChanged += hud.SetMaxHealthValue;
+            currentHealth.OnValueChanged += hud.SetNewHealthValue;
         }
 
         protected void Update()

@@ -6,7 +6,7 @@ namespace ProjectPipe
 {
     public class WorldSaveGameManager : MonoBehaviour
     {
-        [SerializeField] int worldSceneIndex = 1;
+        [SerializeField] private int worldSceneIndex = 1;
 
         public static WorldSaveGameManager Instance { get; private set; }
 
