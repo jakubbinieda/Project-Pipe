@@ -2,8 +2,9 @@ using UnityEngine;
 
 namespace ProjectPipe
 {
-    public class ResetActionFlag : StateMachineBehaviour
+    public class ChangeAttackType : StateMachineBehaviour
     {
+        [SerializeField] private AttackType targetAttackType;
         private CharacterManager _characterManager;
 
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -11,12 +12,7 @@ namespace ProjectPipe
         {
             if (!_characterManager) _characterManager = animator.GetComponent<CharacterManager>();
 
-            _characterManager.IsPerformingAction = false;
-            _characterManager.ApplyRootMotion = false;
-            _characterManager.CanMove = true;
-            _characterManager.CanRotate = true;
-            _characterManager.IsJumping = false;
-            _characterManager.CharacterCombatManager.DisableCombo();
+            _characterManager.CharacterCombatManager.CurrentAttackType = targetAttackType;
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

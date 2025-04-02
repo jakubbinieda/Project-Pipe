@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectPipe
@@ -17,25 +18,42 @@ namespace ProjectPipe
         [field: Header("Status")]
         [field: SerializeField] public bool IsDead { get; private set; }
 
-        public CharacterController CharacterController { get; private set; }
-        public CharacterStatsManager CharacterStatsManager { get; private set; }
         public Animator Animator { get; private set; }
-        public CharacterEffectsManager CharacterEffectsManager { get; private set; }
         public CharacterAnimatorManager CharacterAnimatorManager { get; private set; }
+        public CharacterCombatManager CharacterCombatManager { get; private set; }
+        public CharacterController CharacterController { get; private set; }
+        public CharacterEffectsManager CharacterEffectsManager { get; private set; }
+        public CharacterStatsManager CharacterStatsManager { get; private set; }
 
         protected virtual void Awake()
         {
             DontDestroyOnLoad(gameObject);
 
             Animator = GetComponent<Animator>();
-            CharacterController = GetComponent<CharacterController>();
-            CharacterStatsManager = GetComponent<CharacterStatsManager>();
-            CharacterEffectsManager = GetComponent<CharacterEffectsManager>();
             CharacterAnimatorManager = GetComponent<CharacterAnimatorManager>();
+            CharacterCombatManager = GetComponent<CharacterCombatManager>();
+            CharacterController = GetComponent<CharacterController>();
+            CharacterEffectsManager = GetComponent<CharacterEffectsManager>();
+            CharacterStatsManager = GetComponent<CharacterStatsManager>();
         }
 
         protected virtual void Start()
         {
+            IgnoreOwnColliders();
+        }
+
+        private void IgnoreOwnColliders()
+        {
+            var characterControllerCollider = GetComponent<Collider>();
+            var damageableCharacterColliders = GetComponentsInChildren<Collider>();
+
+            List<Collider> allColliders = new();
+            allColliders.AddRange(damageableCharacterColliders);
+            allColliders.Add(characterControllerCollider);
+
+            for (var i = 0; i < allColliders.Count; i++)
+            for (var j = i + 1; j < allColliders.Count; j++)
+                Physics.IgnoreCollision(allColliders[i], allColliders[j], true);
         }
 
         public IEnumerator ProcessDeathEvent()

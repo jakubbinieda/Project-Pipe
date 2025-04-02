@@ -11,6 +11,9 @@ namespace ProjectPipe
         [Header("Damage Effect")]
         [field: SerializeField] public TakeDamageEffect TakeDamageEffect { get; set; }
 
+        [Header("Default VFX")]
+        [field: SerializeField] public GameObject DefaultBloodSplatterVFX { get; set; }
+
         public static WorldCharacterEffectsManager Instance { get; private set; }
 
         private void Awake()
