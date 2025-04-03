@@ -12,6 +12,7 @@ TagManager:
   - Water
   - UI
   - Character
+  - Damagable Character
   - 
   - 
   - 
@@ -24,8 +25,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Damage Collider
   - 
   - 
   - 

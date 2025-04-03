@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ProjectPipe
 {
@@ -11,6 +12,11 @@ namespace ProjectPipe
         [field: SerializeField] public bool DodgeInput { get; set; }
         [field: SerializeField] public bool JumpInput { get; set; }
         [field: SerializeField] public bool SprintInput { get; set; }
+        [field: SerializeField] public bool LightAttackInput { get; set; }
+        [field: SerializeField] public bool HeavyAttackInput { get; set; }
+        [field: SerializeField] public bool ChargedAttackInput { get; set; }
+        [field: SerializeField] public bool ToggleWeaponInput { get; set; }
+        [SerializeField] private bool attackToggleComposite;
 
         private PlayerControls _playerControls;
 
@@ -39,6 +45,23 @@ namespace ProjectPipe
                 _playerControls.PlayerMovement.Jump.performed += ctx => JumpInput = true;
 
                 _playerControls.PlayerCamera.Movement.performed += ctx => CameraInput = ctx.ReadValue<Vector2>();
+
+                _playerControls.PlayerActions.AttackTypeToggle.performed += ctx => attackToggleComposite = true;
+                _playerControls.PlayerActions.AttackTypeToggle.canceled += ctx => attackToggleComposite = false;
+
+                _playerControls.PlayerActions.LightAttack.performed += ctx =>
+                {
+                    if (!attackToggleComposite) LightAttackInput = true;
+                };
+
+                _playerControls.PlayerActions.HeavyAttack.performed += ctx =>
+                {
+                    if (ctx.action.activeControl.device is Gamepad || attackToggleComposite) HeavyAttackInput = true;
+                };
+
+                _playerControls.PlayerActions.ChargedAttack.performed += ctx => ChargedAttackInput = true;
+                _playerControls.PlayerActions.ChargedAttack.canceled += ctx => ChargedAttackInput = false;
+                _playerControls.PlayerActions.ToggleWeapon.performed += ctx => ToggleWeaponInput = true;
             }
 
             _playerControls.Enable();

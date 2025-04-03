@@ -3,6 +3,9 @@ namespace ProjectPipe
     public class PlayerManager : CharacterManager
     {
         public PlayerAnimatorManager PlayerAnimatorManager { get; private set; }
+        public PlayerCombatManager PlayerCombatManager { get; private set; }
+        public PlayerEquipmentManager PlayerEquipmentManager { get; private set; }
+        public PlayerInventoryManager PlayerInventoryManager { get; private set; }
         public PlayerLocomotionManager PlayerLocomotionManager { get; private set; }
         public PlayerStatsManager PlayerStatsManager { get; private set; }
 
@@ -10,8 +13,11 @@ namespace ProjectPipe
         {
             base.Awake();
 
-            PlayerLocomotionManager = GetComponent<PlayerLocomotionManager>();
             PlayerAnimatorManager = GetComponent<PlayerAnimatorManager>();
+            PlayerCombatManager = GetComponent<PlayerCombatManager>();
+            PlayerEquipmentManager = GetComponent<PlayerEquipmentManager>();
+            PlayerInventoryManager = GetComponent<PlayerInventoryManager>();
+            PlayerLocomotionManager = GetComponent<PlayerLocomotionManager>();
             PlayerStatsManager = GetComponent<PlayerStatsManager>();
         }
 
