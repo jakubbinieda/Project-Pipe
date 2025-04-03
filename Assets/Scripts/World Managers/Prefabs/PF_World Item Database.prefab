@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4718685357667449872
+--- !u!1 &9133871266126294166
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5534564166334400555}
-  - component: {fileID: 1202782070948636561}
+  - component: {fileID: 5620716731487952344}
+  - component: {fileID: 1008736081654801258}
   m_Layer: 0
-  m_Name: PF_World Character Effects Manager
+  m_Name: PF_World Item Database
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5534564166334400555
+--- !u!4 &5620716731487952344
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4718685357667449872}
+  m_GameObject: {fileID: 9133871266126294166}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1202782070948636561
+--- !u!114 &1008736081654801258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4718685357667449872}
+  m_GameObject: {fileID: 9133871266126294166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40cc6f622d061426696476070ed60a6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 72884b6bd310845bbb645f725ce5e5f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instantCharacterEffects:
-  - {fileID: 11400000, guid: e88487deddc0f4b09ba97954e067e51f, type: 2}
-  <TakeDamageEffect>k__BackingField: {fileID: 11400000, guid: e88487deddc0f4b09ba97954e067e51f, type: 2}
-  <DefaultBloodSplatterVFX>k__BackingField: {fileID: 1770063312901723307, guid: ec38712f0780c427f8cb13eb0272052d, type: 3}
+  <NoWeapon>k__BackingField: {fileID: 11400000, guid: 47582da9417d14a67a7003c9dd992285, type: 2}
+  <Weapons>k__BackingField:
+  - {fileID: 11400000, guid: 47582da9417d14a67a7003c9dd992285, type: 2}
+  - {fileID: 11400000, guid: 5ba49f0e17da94acdafe753734cf28c4, type: 2}

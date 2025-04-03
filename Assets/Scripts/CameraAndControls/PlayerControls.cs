@@ -275,7 +275,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""432a2eee-c568-4b1d-a14d-c7345e08c2bb"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard and Mouse"",
@@ -389,6 +389,158 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Player Actions"",
+            ""id"": ""bed6b19f-7466-4bb9-8b33-1d860602699e"",
+            ""actions"": [
+                {
+                    ""name"": ""LightAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""42e906e4-ef54-4c0b-bd94-3d36ed75f6db"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ad2330c-bf7b-49f7-8808-c67c04881c1e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ChargedAttack"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""78017b0a-d86c-44a0-9ffa-23b8b0af4b0a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(pressPoint=0.1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AttackTypeToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""dda6b8f5-2ccb-4ac2-bd33-fc356f10ec2a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ToggleWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""52540c0b-5c23-46da-ba00-60b98dcc462e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""389c6fe0-f19d-4def-94ef-fb149ede94ba"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6f53d12-4a5a-43bb-b901-41a1a65d9cde"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e1168bd-2874-46ff-954c-7942c41678fc"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""HeavyAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53b92c36-1514-4686-9232-419688c0667e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Tap(duration=0.4,pressPoint=0.1)"",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""HeavyAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1cabb545-ffd8-4a7f-a6bf-e0c877b7a5a4"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""ChargedAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9467807d-0611-4a6a-a7b4-766fdcf97de3"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""ChargedAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7e788a5-e3c4-41de-9b11-c26412493231"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""AttackTypeToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73e6ff31-fe46-4b21-9a82-84d2baf15d7e"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""ToggleWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0362ae4-47ac-4833-97e0-5995ac969bfd"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -430,12 +582,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Player Camera
         m_PlayerCamera = asset.FindActionMap("Player Camera", throwIfNotFound: true);
         m_PlayerCamera_Movement = m_PlayerCamera.FindAction("Movement", throwIfNotFound: true);
+        // Player Actions
+        m_PlayerActions = asset.FindActionMap("Player Actions", throwIfNotFound: true);
+        m_PlayerActions_LightAttack = m_PlayerActions.FindAction("LightAttack", throwIfNotFound: true);
+        m_PlayerActions_HeavyAttack = m_PlayerActions.FindAction("HeavyAttack", throwIfNotFound: true);
+        m_PlayerActions_ChargedAttack = m_PlayerActions.FindAction("ChargedAttack", throwIfNotFound: true);
+        m_PlayerActions_AttackTypeToggle = m_PlayerActions.FindAction("AttackTypeToggle", throwIfNotFound: true);
+        m_PlayerActions_ToggleWeapon = m_PlayerActions.FindAction("ToggleWeapon", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
     {
         UnityEngine.Debug.Assert(!m_PlayerMovement.enabled, "This will cause a leak and performance issues, PlayerControls.PlayerMovement.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_PlayerCamera.enabled, "This will cause a leak and performance issues, PlayerControls.PlayerCamera.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_PlayerActions.enabled, "This will cause a leak and performance issues, PlayerControls.PlayerActions.Disable() has not been called.");
     }
 
     /// <summary>
@@ -732,6 +892,146 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerCameraActions" /> instance referencing this action map.
     /// </summary>
     public PlayerCameraActions @PlayerCamera => new PlayerCameraActions(this);
+
+    // Player Actions
+    private readonly InputActionMap m_PlayerActions;
+    private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
+    private readonly InputAction m_PlayerActions_LightAttack;
+    private readonly InputAction m_PlayerActions_HeavyAttack;
+    private readonly InputAction m_PlayerActions_ChargedAttack;
+    private readonly InputAction m_PlayerActions_AttackTypeToggle;
+    private readonly InputAction m_PlayerActions_ToggleWeapon;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Player Actions".
+    /// </summary>
+    public struct PlayerActionsActions
+    {
+        private @PlayerControls m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public PlayerActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/LightAttack".
+        /// </summary>
+        public InputAction @LightAttack => m_Wrapper.m_PlayerActions_LightAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/HeavyAttack".
+        /// </summary>
+        public InputAction @HeavyAttack => m_Wrapper.m_PlayerActions_HeavyAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/ChargedAttack".
+        /// </summary>
+        public InputAction @ChargedAttack => m_Wrapper.m_PlayerActions_ChargedAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/AttackTypeToggle".
+        /// </summary>
+        public InputAction @AttackTypeToggle => m_Wrapper.m_PlayerActions_AttackTypeToggle;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/ToggleWeapon".
+        /// </summary>
+        public InputAction @ToggleWeapon => m_Wrapper.m_PlayerActions_ToggleWeapon;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="PlayerActionsActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(PlayerActionsActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="PlayerActionsActions" />
+        public void AddCallbacks(IPlayerActionsActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PlayerActionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsActionsCallbackInterfaces.Add(instance);
+            @LightAttack.started += instance.OnLightAttack;
+            @LightAttack.performed += instance.OnLightAttack;
+            @LightAttack.canceled += instance.OnLightAttack;
+            @HeavyAttack.started += instance.OnHeavyAttack;
+            @HeavyAttack.performed += instance.OnHeavyAttack;
+            @HeavyAttack.canceled += instance.OnHeavyAttack;
+            @ChargedAttack.started += instance.OnChargedAttack;
+            @ChargedAttack.performed += instance.OnChargedAttack;
+            @ChargedAttack.canceled += instance.OnChargedAttack;
+            @AttackTypeToggle.started += instance.OnAttackTypeToggle;
+            @AttackTypeToggle.performed += instance.OnAttackTypeToggle;
+            @AttackTypeToggle.canceled += instance.OnAttackTypeToggle;
+            @ToggleWeapon.started += instance.OnToggleWeapon;
+            @ToggleWeapon.performed += instance.OnToggleWeapon;
+            @ToggleWeapon.canceled += instance.OnToggleWeapon;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="PlayerActionsActions" />
+        private void UnregisterCallbacks(IPlayerActionsActions instance)
+        {
+            @LightAttack.started -= instance.OnLightAttack;
+            @LightAttack.performed -= instance.OnLightAttack;
+            @LightAttack.canceled -= instance.OnLightAttack;
+            @HeavyAttack.started -= instance.OnHeavyAttack;
+            @HeavyAttack.performed -= instance.OnHeavyAttack;
+            @HeavyAttack.canceled -= instance.OnHeavyAttack;
+            @ChargedAttack.started -= instance.OnChargedAttack;
+            @ChargedAttack.performed -= instance.OnChargedAttack;
+            @ChargedAttack.canceled -= instance.OnChargedAttack;
+            @AttackTypeToggle.started -= instance.OnAttackTypeToggle;
+            @AttackTypeToggle.performed -= instance.OnAttackTypeToggle;
+            @AttackTypeToggle.canceled -= instance.OnAttackTypeToggle;
+            @ToggleWeapon.started -= instance.OnToggleWeapon;
+            @ToggleWeapon.performed -= instance.OnToggleWeapon;
+            @ToggleWeapon.canceled -= instance.OnToggleWeapon;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="PlayerActionsActions.UnregisterCallbacks(IPlayerActionsActions)" />.
+        /// </summary>
+        /// <seealso cref="PlayerActionsActions.UnregisterCallbacks(IPlayerActionsActions)" />
+        public void RemoveCallbacks(IPlayerActionsActions instance)
+        {
+            if (m_Wrapper.m_PlayerActionsActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="PlayerActionsActions.AddCallbacks(IPlayerActionsActions)" />
+        /// <seealso cref="PlayerActionsActions.RemoveCallbacks(IPlayerActionsActions)" />
+        /// <seealso cref="PlayerActionsActions.UnregisterCallbacks(IPlayerActionsActions)" />
+        public void SetCallbacks(IPlayerActionsActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PlayerActionsActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PlayerActionsActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="PlayerActionsActions" /> instance referencing this action map.
+    /// </summary>
+    public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
     private int m_GamepadSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -808,5 +1108,48 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMovement(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player Actions" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="PlayerActionsActions.AddCallbacks(IPlayerActionsActions)" />
+    /// <seealso cref="PlayerActionsActions.RemoveCallbacks(IPlayerActionsActions)" />
+    public interface IPlayerActionsActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "LightAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLightAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "HeavyAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHeavyAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ChargedAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnChargedAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "AttackTypeToggle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAttackTypeToggle(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ToggleWeapon" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnToggleWeapon(InputAction.CallbackContext context);
     }
 }

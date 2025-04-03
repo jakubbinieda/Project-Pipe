@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625f9378f11354fabb9bc878ab7facd2, type: 3}
+  m_Name: Test Sword
+  m_EditorClassIdentifier: 
+  <ItemID>k__BackingField: 1
+  <ItemName>k__BackingField: Test Sword
+  <Prefab>k__BackingField: {fileID: 4859840666393428756, guid: 88c11735bc68344668c387a189f5c895, type: 3}
+  <PhysicalDamage>k__BackingField: 10
+  <LightAttackDamageMultiplier>k__BackingField: 1
+  <BaseStaminaCost>k__BackingField: 20
+  <LightAttackStaminaMultiplier>k__BackingField: 1
+  <HeavyAttackStaminaMultiplier>k__BackingField: 1.5
+  <LightAttackAction>k__BackingField: {fileID: 11400000, guid: c411f33afe2d3428cb48babaa43bb240, type: 2}
+  <HeavyAttackAction>k__BackingField: {fileID: 11400000, guid: d9fa495a94a2c401c8117162b65272e7, type: 2}
