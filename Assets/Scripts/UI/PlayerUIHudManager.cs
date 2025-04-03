@@ -12,9 +12,9 @@ namespace ProjectPipe
             healthBar.SetStat(newValue);
         }
 
-        public void SetMaxHealthValue(int oldValue, int maxHealth)
+        public void SetMaxHealthValue(int oldValue, int newValue)
         {
-            healthBar.SetMaxStat(maxHealth);
+            healthBar.SetMaxStat(newValue);
         }
 
         public void SetNewStaminaValue(float oldValue, float newValue)
@@ -22,9 +22,9 @@ namespace ProjectPipe
             staminaBar.SetStat(Mathf.RoundToInt(newValue));
         }
 
-        public void SetMaxStaminaValue(float oldValue, float maxStamina)
+        public void SetMaxStaminaValue(float oldValue, float newValue)
         {
-            staminaBar.SetMaxStat(Mathf.RoundToInt(maxStamina));
+            staminaBar.SetMaxStat(Mathf.RoundToInt(newValue));
         }
     } 
 }

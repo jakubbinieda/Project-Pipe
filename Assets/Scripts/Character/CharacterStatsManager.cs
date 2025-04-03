@@ -5,10 +5,10 @@ namespace ProjectPipe
     public class CharacterStatsManager : MonoBehaviour
     {
         [field: Header("Health & Stamina")]
-        [SerializeField] private Observable<int> currentHealth = new(0);
-        [SerializeField] private Observable<int> maxHealth = new(0);
-        [SerializeField] private Observable<float> currentStamina = new(0);
-        [SerializeField] private Observable<float> maxStamina = new(0);
+        [SerializeField] protected Observable<int> currentHealth = new(0);
+        [SerializeField] protected Observable<int> maxHealth = new(0);
+        [SerializeField] protected Observable<float> currentStamina = new(0);
+        [SerializeField] protected Observable<float> maxStamina = new(0);
         [SerializeField] private float staminaRegenerationAmount = 2;
         [SerializeField] private float staminaRegenerationCooldown = 2;
 
@@ -21,17 +21,10 @@ namespace ProjectPipe
             _characterManager = GetComponent<CharacterManager>();
         }
 
-        protected void Start()
+        protected virtual void Start()
         {
-            var hud = PlayerUIManager.Instance.PlayerUIHudManager;
-
             currentStamina.OnValueChanged += ResetStaminaRegenerationTimer;
-            maxStamina.OnValueChanged += hud.SetMaxStaminaValue;
-            currentStamina.OnValueChanged += hud.SetNewStaminaValue;
-
             currentHealth.OnValueChanged += CheckHP;
-            maxHealth.OnValueChanged += hud.SetMaxHealthValue;
-            currentHealth.OnValueChanged += hud.SetNewHealthValue;
         }
 
         protected void Update()
@@ -57,7 +50,11 @@ namespace ProjectPipe
                 return;
 
             _staminaRegenerationTickTimer = 0;
-            currentStamina.Value = Mathf.Clamp(currentStamina.Value + staminaRegenerationAmount, 0, maxStamina);
+            
+            if (currentStamina.Value + staminaRegenerationAmount < maxStamina.Value)
+                currentStamina.Value += staminaRegenerationAmount;
+            else if (!Mathf.Approximately(currentStamina.Value, maxStamina.Value))
+                currentStamina.Value = maxStamina.Value;
         }
 
         private void ResetStaminaRegenerationTimer(float oldValue, float newValue)
