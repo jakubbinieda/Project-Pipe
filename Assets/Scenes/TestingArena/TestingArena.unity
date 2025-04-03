@@ -515,6 +515,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -6.173706
       objectReference: {fileID: 0}
+    - target: {fileID: 2035071624109095010, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1854508625}
+    - target: {fileID: 2035071624109095010, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      propertyPath: staminaBar
+      value: 
+      objectReference: {fileID: 1574990202}
     - target: {fileID: 2386665305138243662, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1096,6 +1104,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 024f03bced0b042c49a5179cf235781d, type: 3}
+--- !u!114 &1574990202 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3681128176701304254, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+  m_PrefabInstance: {fileID: 671528437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac8cf4251a04e5f3a2b091e92e6d022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1634981952 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2035071624109095010, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
@@ -1105,6 +1124,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63e83710e8b49b101bf528a1f2b86687, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1854508625 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2365176547112416478, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+  m_PrefabInstance: {fileID: 671528437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ac8cf4251a04e5f3a2b091e92e6d022, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2131726532
