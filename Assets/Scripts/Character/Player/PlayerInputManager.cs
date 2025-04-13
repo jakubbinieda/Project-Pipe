@@ -7,11 +7,19 @@ namespace ProjectPipe
     {
         public static PlayerInputManager Instance;
 
+        [Header("Camera")]
         [field: SerializeField] public Vector2 CameraInput { get; private set; }
+        [field: SerializeField] public bool LockOnInput { get; set; }
+        [field: SerializeField] public bool ChangeLockOnToLeft { get; set; }
+        [field: SerializeField] public bool ChangeLockOnToRight { get; set; }
+
+        [Header("Movement")]
         [field: SerializeField] public Vector2 MovementInput { get; private set; }
         [field: SerializeField] public bool DodgeInput { get; set; }
         [field: SerializeField] public bool JumpInput { get; set; }
         [field: SerializeField] public bool SprintInput { get; set; }
+
+        [Header("Actions")]
         [field: SerializeField] public bool LightAttackInput { get; set; }
         [field: SerializeField] public bool HeavyAttackInput { get; set; }
         [field: SerializeField] public bool ChargedAttackInput { get; set; }
@@ -45,6 +53,9 @@ namespace ProjectPipe
                 _playerControls.PlayerMovement.Jump.performed += ctx => JumpInput = true;
 
                 _playerControls.PlayerCamera.Movement.performed += ctx => CameraInput = ctx.ReadValue<Vector2>();
+                _playerControls.PlayerCamera.LockOn.performed += ctx => LockOnInput = true;
+                _playerControls.PlayerCamera.ChangeLockOnToLeft.performed += ctx => ChangeLockOnToLeft = true;
+                _playerControls.PlayerCamera.ChangeLockOnToRight.performed += ctx => ChangeLockOnToRight = true;
 
                 _playerControls.PlayerActions.AttackTypeToggle.performed += ctx => attackToggleComposite = true;
                 _playerControls.PlayerActions.AttackTypeToggle.canceled += ctx => attackToggleComposite = false;
