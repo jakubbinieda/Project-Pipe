@@ -64,5 +64,9 @@ namespace ProjectPipe
 
             yield return new WaitForSeconds(5f);
         }
+
+        protected virtual void FixedUpdate()
+        {
+        }
     }
 }

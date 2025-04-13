@@ -8,7 +8,7 @@ namespace ProjectPipe
         [field: SerializeField] public string LastAttackAnimation { get; set; }
 
         private readonly int _isChargingAttackHash = Animator.StringToHash("IsChargingAttack");
-        private CharacterManager _characterManager;
+        protected CharacterManager _characterManager;
 
         public AttackType CurrentAttackType { get; set; }
         protected Observable<bool> IsChargingHeavyAttack { get; set; } = new(false);
