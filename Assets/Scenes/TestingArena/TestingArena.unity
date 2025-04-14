@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 595480019}
   - component: {fileID: 595480018}
   - component: {fileID: 595480017}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1280,6 +1280,10 @@ PrefabInstance:
       propertyPath: aiCharacters.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5320818969423345476, guid: 892409978f8389e2aa5817a9a0ec6e77, type: 3}
+      propertyPath: 'aiCharacters.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3938185204048873309, guid: e02407b16b6be15e0a64f8525f02b308, type: 3}
     - target: {fileID: 8059297335927340649, guid: 892409978f8389e2aa5817a9a0ec6e77, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.229292
@@ -1395,7 +1399,7 @@ GameObject:
   - component: {fileID: 1463574135}
   - component: {fileID: 1463574134}
   - component: {fileID: 1463574133}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1514,7 +1518,7 @@ GameObject:
   - component: {fileID: 1576524914}
   - component: {fileID: 1576524913}
   - component: {fileID: 1576524912}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1622,7 +1626,7 @@ GameObject:
   - component: {fileID: 1624034898}
   - component: {fileID: 1624034897}
   - component: {fileID: 1624034896}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1796,6 +1800,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4279581721011804376, guid: e02407b16b6be15e0a64f8525f02b308, type: 3}
+    - {fileID: 1021463206493474659, guid: e02407b16b6be15e0a64f8525f02b308, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e02407b16b6be15e0a64f8525f02b308, type: 3}
@@ -1998,6 +2003,10 @@ PrefabInstance:
     - target: {fileID: 8045617954311691964, guid: ecca00b1ed2787142b7fe09539541858, type: 3}
       propertyPath: m_Name
       value: PF_World Utility Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045617954311691964, guid: ecca00b1ed2787142b7fe09539541858, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8814380998872753570, guid: ecca00b1ed2787142b7fe09539541858, type: 3}
       propertyPath: m_LocalPosition.x

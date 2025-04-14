@@ -7,7 +7,7 @@ namespace ProjectPipe
 {
     public class WorldAIManager : MonoBehaviour
     {
-        public static WorldAIManager Instance;
+        [HideInInspector] public static WorldAIManager Instance;
 
         [Header("AI Characters")]
         [SerializeField] private GameObject[] aiCharacters;
@@ -80,7 +80,7 @@ namespace ProjectPipe
 
         private void DisableAllCharacters()
         {
-            // TODO
+            // TODO - to save resources
         }
     }
 }

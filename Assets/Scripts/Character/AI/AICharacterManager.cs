@@ -11,12 +11,12 @@ namespace ProjectPipe
         [field: SerializeField] private AIState currentState;
         
         [field: Header("Navmesh Agent")]
-        [field: SerializeField] public bool isNavMeshAgentEnabled = false;
+        [field: SerializeField] public bool isNavMeshAgentEnabled = false; // TEMPORARY
         [field: SerializeField] public NavMeshAgent navMeshAgent;
         
         [field: Header("States")]
-        public IdleState idleState;
-        public PursueTargetState pursueTargetState;
+        [field: SerializeField] public IdleState idleState;
+        [field: SerializeField] public PursueTargetState pursueTargetState;
         
         protected override void Awake()
         {
