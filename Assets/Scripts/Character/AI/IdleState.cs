@@ -12,14 +12,11 @@ namespace ProjectPipe
             if (aiCharacterManager.AICharacterCombatManager.CurrentTarget != null
                 && aiCharacterManager.isNavMeshAgentEnabled)
             {
-                return SwitchState(aiCharacterManager, aiCharacterManager.pursueTargetState);
+                return SwitchState(aiCharacterManager, aiCharacterManager.PursueTargetState);
             }
-            else
-            {
-                aiCharacterManager.AICharacterCombatManager.FindTargetViaLineOfSight(aiCharacterManager);
-                return this;
-            }
-
+          
+            aiCharacterManager.AICharacterCombatManager.FindTargetViaLineOfSight(aiCharacterManager);
+            return this;
         }
         
     }

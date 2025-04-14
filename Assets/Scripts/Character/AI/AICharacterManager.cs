@@ -1,22 +1,24 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 namespace ProjectPipe
 {
     public class AICharacterManager : CharacterManager
     {
-        [HideInInspector] public AICharacterCombatManager AICharacterCombatManager { get; private set; }
-        
+        public AICharacterCombatManager AICharacterCombatManager { get; private set; }
+
         [field: Header("Current State")]
-        [field: SerializeField] private AIState currentState;
-        
+        [field: SerializeField] private AIState CurrentState { get; set; }
+
         [field: Header("Navmesh Agent")]
-        [field: SerializeField] public bool isNavMeshAgentEnabled = false; // TEMPORARY
-        [field: SerializeField] public NavMeshAgent navMeshAgent;
-        
+        [field: SerializeField] public bool isNavMeshAgentEnabled; // TEMPORARY
+
+        [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
+
         [field: Header("States")]
-        [field: SerializeField] public IdleState idleState;
-        [field: SerializeField] public PursueTargetState pursueTargetState;
+        [field: SerializeField] public IdleState IdleState { get; private set; }
+        [field: SerializeField] public PursueTargetState PursueTargetState { get; private set; }
         
         protected override void Awake()
         {
@@ -25,12 +27,11 @@ namespace ProjectPipe
             AICharacterCombatManager = GetComponent<AICharacterCombatManager>();
             if (isNavMeshAgentEnabled)
             {
-                navMeshAgent = GetComponent<NavMeshAgent>();
+                NavMeshAgent = GetComponent<NavMeshAgent>();
             }
-            navMeshAgent = GetComponent<NavMeshAgent>();
-            idleState = Instantiate(idleState);
-            pursueTargetState = Instantiate(pursueTargetState);
-            currentState = idleState;
+            IdleState = Instantiate(IdleState);
+            PursueTargetState = Instantiate(PursueTargetState);
+            CurrentState = IdleState;
         }
 
         protected override void FixedUpdate()
@@ -41,10 +42,10 @@ namespace ProjectPipe
         
         private void ProcessStateMachine()
         {
-            AIState nextState = currentState?.Tick(this);
+            AIState nextState = CurrentState?.Tick(this);
             if (nextState != null)
             {
-                currentState = nextState;
+                CurrentState = nextState;
             }
         }
 

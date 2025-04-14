@@ -13,10 +13,10 @@ namespace ProjectPipe
             if (aiCharacterManager.IsPerformingAction)
                 return this;
             if (aiCharacterManager.AICharacterCombatManager.CurrentTarget == null)
-                return SwitchState(aiCharacterManager, aiCharacterManager.idleState);
+                return SwitchState(aiCharacterManager, aiCharacterManager.IdleState);
             
-            if (!aiCharacterManager.navMeshAgent.enabled)
-                aiCharacterManager.navMeshAgent.enabled = true;
+            if (!aiCharacterManager.NavMeshAgent.enabled)
+                aiCharacterManager.NavMeshAgent.enabled = true;
             
             // TODO
             // NavMeshPath path = new NavMeshPath();

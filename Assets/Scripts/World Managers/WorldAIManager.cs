@@ -7,15 +7,15 @@ namespace ProjectPipe
 {
     public class WorldAIManager : MonoBehaviour
     {
-        [HideInInspector] public static WorldAIManager Instance;
+        private static WorldAIManager Instance { get; set; }
 
-        [Header("AI Characters")]
-        [SerializeField] private GameObject[] aiCharacters;
-        [SerializeField] private List<GameObject> aiCharactersSpawned;
+        [field: Header("AI Characters")]
+        [field: SerializeField] private GameObject[] aiCharacters;
+        [field: SerializeField] private List<GameObject> aiCharactersSpawned;
         
-        [Header("Debug")]
-        [SerializeField] private bool despawnAICharacters = false;
-        [SerializeField] private bool respawnAICharacters = false;
+        [field: Header("Debug")]
+        [field: SerializeField] private bool despawnAICharacters;
+        [field: SerializeField] private bool respawnAICharacters;
         
         private void Awake()
         {

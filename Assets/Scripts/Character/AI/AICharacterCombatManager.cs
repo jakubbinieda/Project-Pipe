@@ -13,46 +13,42 @@ namespace ProjectPipe
 
         [field: Header("Sight")]
         [field: SerializeField] private float sightRange = 17f;
-        [field: SerializeField] private float minimumSightAngle = -20f;
-        [field: SerializeField] private float maximumSightAngle = 20f;
-        
+        [field: SerializeField] private float sightAngle = 20f;
+
         protected override void Update()
         {
             base.Update();
-            if (drawVisionCone) DrawVisionCone(transform.position, transform.forward, 2 * maximumSightAngle, sightRange);
+            if (drawVisionCone) DrawVisionCone(transform.position, transform.forward);
         }
 
-        // -------------------------------------------------------------------------
-        private void DrawVisionCone(Vector3 origin, Vector3 forward, float visionAngle, float sightRange,
-            int horizontalRayCount = 5, int verticalRayCount = 5)
-        {
-            Vector3 offset = new Vector3(0, 0, 0);
-            offset.y += _characterManager.CharacterController.height * transform.localScale.y;
-            
-            for (var h = 1; h < horizontalRayCount; h++)
-            {
-                var horizontalLerpFactor = (float) h / horizontalRayCount;
-                var horizontalAngle = Mathf.Lerp(-visionAngle / 2, visionAngle / 2, horizontalLerpFactor);
-
-                for (var v = 1; v < verticalRayCount; v++)
-                {
-                    var verticalLerpFactor = (float)v / verticalRayCount;
-                    var verticalAngle = Mathf.Lerp(-visionAngle / 2, visionAngle / 2, verticalLerpFactor);
-
-                    var rayRotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
-                    var rayDirection = rayRotation * forward * sightRange;
-
-                    Debug.DrawLine(origin + offset, origin + rayDirection, Color.cyan);
-                }
-            }
-        }
-        // -------------------------------------------------------------------------
+        // This is debug only function
+       private void DrawVisionCone(Vector3 origin, Vector3 forward, int horizontalRayCount = 5, int verticalRayCount = 5)
+       {
+           var offset = new Vector3(0, _characterManager.CharacterController.height * transform.localScale.y, 0);
+       
+           for (var h = 0; h < horizontalRayCount; h++)
+           {
+               var horizontalLerpFactor = (float)h / (horizontalRayCount - 1);
+               var horizontalAngle = Mathf.Lerp(-sightAngle, sightAngle, horizontalLerpFactor);
+       
+               for (var v = 0; v < verticalRayCount; v++)
+               {
+                   var verticalLerpFactor = (float)v / (verticalRayCount - 1);
+                   var verticalAngle = Mathf.Lerp(-sightAngle, sightAngle, verticalLerpFactor);
+       
+                   var rayRotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
+                   var rayDirection = rayRotation * forward * sightRange;
+       
+                   Debug.DrawLine(origin + offset, origin + offset + rayDirection, Color.cyan);
+               }
+           }
+       }
 
         public void FindTargetViaLineOfSight(AICharacterManager aiCharacterManager)
         {
             if (CurrentTarget != null) return;
-            
-            Vector3 offset = new Vector3(0, 0, 0);
+
+            var offset = new Vector3(0, 0, 0);
             offset.y += _characterManager.CharacterController.height * transform.localScale.y;
 
             var colliders = Physics.OverlapSphere(
@@ -67,10 +63,11 @@ namespace ProjectPipe
                 if (targetCharacter == aiCharacterManager) continue;
                 if (targetCharacter.IsDead) continue;
 
-                var targetDirection = targetCharacter.transform.position - aiCharacterManager.transform.position + offset;
+                var targetDirection = 
+                    targetCharacter.transform.position - aiCharacterManager.transform.position + offset;
                 var viewableAngle = Vector3.Angle(targetDirection, aiCharacterManager.transform.forward);
-                
-                if (viewableAngle < maximumSightAngle && viewableAngle > minimumSightAngle)
+
+                if (viewableAngle < sightAngle && viewableAngle > -sightAngle)
                 {
                     if (Physics.Linecast(aiCharacterManager.transform.position + offset,
                             targetCharacter.transform.position,
@@ -90,9 +87,10 @@ namespace ProjectPipe
                         {
                             Debug.DrawLine(aiCharacterManager.transform.position + offset,
                                 targetCharacter.transform.position,
-                                Color.green, 2f);
+                                Color.green, 20f);
                             Debug.Log("FOUND TARGET");
                         }
+
                         aiCharacterManager.AICharacterCombatManager.CurrentTarget = targetCharacter;
                     }
                 }
@@ -100,9 +98,10 @@ namespace ProjectPipe
                 {
                     if (drawSightRays)
                     {
-                        Debug.Log("OUT OF SIGHT");
-                        Debug.DrawLine(aiCharacterManager.transform.position + offset, targetCharacter.transform.position,
+                        Debug.DrawLine(aiCharacterManager.transform.position + offset,
+                            targetCharacter.transform.position,
                             Color.yellow, 0.5f);
+                        Debug.Log("OUT OF SIGHT");
                     }
                 }
             }

@@ -4,9 +4,9 @@ namespace ProjectPipe
 {
     public class WorldUtilityManager : MonoBehaviour
     {
-        [HideInInspector] public static WorldUtilityManager Instance;
+        public static WorldUtilityManager Instance { get; private set; }
         
-        [Header("Layers")]
+        [field: Header("Layers")]
         [field: SerializeField] public LayerMask CharacterLayers { get; private set; }
         [field: SerializeField] public LayerMask EnvironmentLayers { get; private set; }
 

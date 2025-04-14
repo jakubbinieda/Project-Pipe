@@ -13,9 +13,9 @@ TagManager:
   - UI
   - Character
   - Damagable Character
-  - 
-  - Fake Wall
-  - Nav
+  - AI
+  - Floor
+  - Walls
   - 
   - 
   - 
