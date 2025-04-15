@@ -47,7 +47,7 @@ namespace ProjectPipe
 
             HandleGroundedLocomotion();
             HandleJumpingMovement();
-            HandleRotation();
+            HandlePlayerRotation();
         }
 
         private void HandleGroundedLocomotion()
@@ -67,9 +67,7 @@ namespace ProjectPipe
             moveDirection.Normalize();
             moveDirection.y = 0;
 
-            _moveAmount = Mathf.Clamp01(PlayerInputManager.Instance.MovementInput.magnitude);
-            // Clamp it so it becomes 0.5 or 1
-            _moveAmount = Mathf.Ceil(_moveAmount * 2) / 2f;
+            _moveAmount = ClampInput(PlayerInputManager.Instance.MovementInput.magnitude);
 
             if (_playerManager.IsSprinting)
             {
@@ -86,7 +84,12 @@ namespace ProjectPipe
                 _playerManager.CharacterController.Move(walkSpeed * Time.deltaTime * moveDirection);
             }
 
-            if (_playerManager) _playerManager.PlayerAnimatorManager.UpdateAnimatorLocomotionValues(0, _moveAmount);
+            if (!PlayerCamera.Instance.IsLockedOn || _playerManager.IsSprinting)
+                _playerManager.PlayerAnimatorManager.UpdateAnimatorLocomotionValues(0, _moveAmount);
+            else
+                _playerManager.PlayerAnimatorManager.UpdateAnimatorLocomotionValues(
+                    ClampInput(PlayerInputManager.Instance.MovementInput.x),
+                    ClampInput(PlayerInputManager.Instance.MovementInput.y));
         }
 
         private void HandleJumpingMovement()
@@ -105,23 +108,36 @@ namespace ProjectPipe
             }
         }
 
-        private void HandleRotation()
+        private void HandlePlayerRotation()
         {
-            if (!_playerManager.CanRotate) return;
+            if (_playerManager.IsDead || !_playerManager.CanRotate) return;
 
-            var targetRotationDirection =
-                PlayerCamera.Instance.transform.forward * PlayerInputManager.Instance.MovementInput.y;
-            targetRotationDirection +=
-                PlayerCamera.Instance.transform.right * PlayerInputManager.Instance.MovementInput.x;
-            targetRotationDirection.Normalize();
-            targetRotationDirection.y = 0;
+            Vector3 targetPlayerDirection;
 
-            if (targetRotationDirection == Vector3.zero) targetRotationDirection = transform.forward;
+            if (PlayerCamera.Instance.IsLockedOn && !_playerManager.IsSprinting && !IsRolling)
+            {
+                targetPlayerDirection = _playerManager.PlayerCombatManager.CurrentTarget.transform.position -
+                                        _playerManager.transform.position;
+                targetPlayerDirection.y = 0;
+                targetPlayerDirection.Normalize();
+            }
+            else
+            {
+                targetPlayerDirection = PlayerCamera.Instance.CameraObject.transform.forward *
+                                        PlayerInputManager.Instance.MovementInput.y;
+                targetPlayerDirection += PlayerCamera.Instance.CameraObject.transform.right *
+                                         PlayerInputManager.Instance.MovementInput.x;
+                targetPlayerDirection.y = 0;
+                targetPlayerDirection.Normalize();
 
-            var turnRotation = Quaternion.LookRotation(targetRotationDirection);
-            var newRotation = Quaternion.Slerp(transform.rotation, turnRotation, Time.deltaTime * rotationSpeed);
+                if (targetPlayerDirection == Vector3.zero) targetPlayerDirection = _playerManager.transform.forward;
+            }
 
-            transform.rotation = newRotation;
+            var targetPlayerRotation = Quaternion.LookRotation(targetPlayerDirection);
+            var newRotation = Quaternion.Slerp(_playerManager.transform.rotation, targetPlayerRotation,
+                Time.deltaTime * rotationSpeed);
+
+            _playerManager.transform.rotation = newRotation;
         }
 
         private void AttemptToDodge()
@@ -147,6 +163,7 @@ namespace ProjectPipe
                 _playerManager.transform.rotation = playerRotation;
 
                 _playerManager.PlayerAnimatorManager.PlayTargetAnimation("Roll_Forward_01", true, true);
+                IsRolling = true;
             }
             else
             {
@@ -184,6 +201,18 @@ namespace ProjectPipe
             _playerManager.IsJumping = true;
 
             _playerManager.PlayerStatsManager.SpendStamina(jumpStaminaCost);
+        }
+
+        private float ClampInput(float input)
+        {
+            return input switch
+            {
+                > 0.5f => 1f,
+                > 0f => 0.5f,
+                < -0.5f => -1f,
+                < 0f => -0.5f,
+                _ => 0f
+            };
         }
 
         public void UpdateJumpVelocity()

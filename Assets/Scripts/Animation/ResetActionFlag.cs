@@ -17,6 +17,7 @@ namespace ProjectPipe
             _characterManager.CanRotate = true;
             _characterManager.IsJumping = false;
             _characterManager.CharacterCombatManager.DisableCombo();
+            _characterManager.CharacterLocomotionManager.IsRolling = false;
         }
 
         // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
