@@ -11,6 +11,9 @@ namespace ProjectPipe
         [SerializeField] private float groundCheckSphereRadius = 0.2f;
         [SerializeField] private LayerMask groundLayer;
 
+        [Header("Flags")]
+        [field: SerializeField] public bool IsRolling { get; set; }
+
         private CharacterManager _characterManager;
         private bool _fallVelocitySet;
         private float _inAirTimer;

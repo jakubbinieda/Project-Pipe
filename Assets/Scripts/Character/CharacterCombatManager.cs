@@ -4,11 +4,14 @@ namespace ProjectPipe
 {
     public class CharacterCombatManager : MonoBehaviour
     {
-        [field: SerializeField] public bool CanPerformCombo { get; private set; }
-        [field: SerializeField] public string LastAttackAnimation { get; set; }
+        [field: SerializeField] public Transform LockOnTransform { get; set; }
+        [field: SerializeField] public CharacterManager CurrentTarget { get; set; }
 
         private readonly int _isChargingAttackHash = Animator.StringToHash("IsChargingAttack");
         private CharacterManager _characterManager;
+
+        public bool CanPerformCombo { get; private set; }
+        public string LastAttackAnimation { get; set; }
 
         public AttackType CurrentAttackType { get; set; }
         protected Observable<bool> IsChargingHeavyAttack { get; set; } = new(false);
@@ -37,6 +40,11 @@ namespace ProjectPipe
         public void DisableCombo()
         {
             CanPerformCombo = false;
+        }
+
+        public virtual void SetTarget(CharacterManager target)
+        {
+            CurrentTarget = target ? target : null;
         }
     }
 }

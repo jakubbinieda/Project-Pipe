@@ -23,6 +23,7 @@ namespace ProjectPipe
         public CharacterCombatManager CharacterCombatManager { get; private set; }
         public CharacterController CharacterController { get; private set; }
         public CharacterEffectsManager CharacterEffectsManager { get; private set; }
+        public CharacterLocomotionManager CharacterLocomotionManager { get; private set; }
         public CharacterStatsManager CharacterStatsManager { get; private set; }
 
         protected virtual void Awake()
@@ -34,6 +35,7 @@ namespace ProjectPipe
             CharacterCombatManager = GetComponent<CharacterCombatManager>();
             CharacterController = GetComponent<CharacterController>();
             CharacterEffectsManager = GetComponent<CharacterEffectsManager>();
+            CharacterLocomotionManager = GetComponent<CharacterLocomotionManager>();
             CharacterStatsManager = GetComponent<CharacterStatsManager>();
         }
 

@@ -49,5 +49,12 @@ namespace ProjectPipe
                 _playerManager.PlayerEquipmentManager.EquippedWeapon.HeavyAttackAction.AttemptToPerformAction(
                     _playerManager, _playerManager.PlayerEquipmentManager.EquippedWeapon);
         }
+
+        public override void SetTarget(CharacterManager target)
+        {
+            base.SetTarget(target);
+
+            PlayerCamera.Instance.SetLockOnCameraHeight();
+        }
     }
 }
