@@ -47,6 +47,21 @@ namespace ProjectPipe
             {
                 CurrentState = nextState;
             }
+            
+            if (isNavMeshAgentEnabled)
+            {
+                Vector3 agentDestination = NavMeshAgent.destination;
+                float remainingDistance = Vector3.Distance(transform.position, agentDestination);
+                if (remainingDistance > NavMeshAgent.stoppingDistance)
+                {
+                    NavMeshAgent.isStopped = false;
+                }
+                else
+                {
+                    NavMeshAgent.isStopped = true;
+                }
+            }
+            
         }
 
     }

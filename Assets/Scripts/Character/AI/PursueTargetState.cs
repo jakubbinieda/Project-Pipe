@@ -18,10 +18,9 @@ namespace ProjectPipe
             if (!aiCharacterManager.NavMeshAgent.enabled)
                 aiCharacterManager.NavMeshAgent.enabled = true;
             
-            // TODO
-            // NavMeshPath path = new NavMeshPath();
-            // aiCharacterManager.navMeshAgent.CalculatePath(aiCharacterManager.AICharacterCombatManager.CurrentTarget.transform.position, path);
-            // aiCharacterManager.navMeshAgent.SetPath(path);
+            NavMeshPath path = new NavMeshPath();
+            aiCharacterManager.NavMeshAgent.CalculatePath(aiCharacterManager.AICharacterCombatManager.CurrentTarget.transform.position, path);
+            aiCharacterManager.NavMeshAgent.SetPath(path);
             return this;
         }
     }

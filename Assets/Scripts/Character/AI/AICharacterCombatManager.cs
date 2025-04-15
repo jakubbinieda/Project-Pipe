@@ -22,25 +22,17 @@ namespace ProjectPipe
         }
 
         // This is debug only function
-       private void DrawVisionCone(Vector3 origin, Vector3 forward, int horizontalRayCount = 5, int verticalRayCount = 5)
+       private void DrawVisionCone(Vector3 origin, Vector3 forward, int rayCount = 20)
        {
-           var offset = new Vector3(0, _characterManager.CharacterController.height * transform.localScale.y, 0);
-       
-           for (var h = 0; h < horizontalRayCount; h++)
+           for (int i = 0; i < rayCount; i++)
            {
-               var horizontalLerpFactor = (float)h / (horizontalRayCount - 1);
-               var horizontalAngle = Mathf.Lerp(-sightAngle, sightAngle, horizontalLerpFactor);
+               float lerpFactor = (float)i / (rayCount - 1);
+               float angle = Mathf.Lerp(-sightAngle, sightAngle, lerpFactor);
        
-               for (var v = 0; v < verticalRayCount; v++)
-               {
-                   var verticalLerpFactor = (float)v / (verticalRayCount - 1);
-                   var verticalAngle = Mathf.Lerp(-sightAngle, sightAngle, verticalLerpFactor);
+               Quaternion rayRotation = Quaternion.Euler(0, angle, 0);
+               Vector3 rayDirection = rayRotation * forward * sightRange;
        
-                   var rayRotation = Quaternion.Euler(verticalAngle, horizontalAngle, 0);
-                   var rayDirection = rayRotation * forward * sightRange;
-       
-                   Debug.DrawLine(origin + offset, origin + offset + rayDirection, Color.cyan);
-               }
+               Debug.DrawLine(origin, origin + rayDirection, Color.cyan);
            }
        }
 
@@ -48,11 +40,8 @@ namespace ProjectPipe
         {
             if (CurrentTarget != null) return;
 
-            var offset = new Vector3(0, 0, 0);
-            offset.y += _characterManager.CharacterController.height * transform.localScale.y;
-
             var colliders = Physics.OverlapSphere(
-                aiCharacterManager.transform.position + offset,
+                aiCharacterManager.transform.position,
                 sightRange,
                 WorldUtilityManager.Instance.CharacterLayers);
 
@@ -64,18 +53,18 @@ namespace ProjectPipe
                 if (targetCharacter.IsDead) continue;
 
                 var targetDirection = 
-                    targetCharacter.transform.position - aiCharacterManager.transform.position + offset;
+                    targetCharacter.transform.position - aiCharacterManager.transform.position;
                 var viewableAngle = Vector3.Angle(targetDirection, aiCharacterManager.transform.forward);
 
                 if (viewableAngle < sightAngle && viewableAngle > -sightAngle)
                 {
-                    if (Physics.Linecast(aiCharacterManager.transform.position + offset,
+                    if (Physics.Linecast(aiCharacterManager.transform.position,
                             targetCharacter.transform.position,
                             WorldUtilityManager.Instance.EnvironmentLayers))
                     {
                         if (drawSightRays)
                         {
-                            Debug.DrawLine(aiCharacterManager.transform.position + offset,
+                            Debug.DrawLine(aiCharacterManager.transform.position,
                                 targetCharacter.transform.position,
                                 Color.red, 0.5f);
                             Debug.Log("BLOCKED");
@@ -85,7 +74,7 @@ namespace ProjectPipe
                     {
                         if (drawSightRays)
                         {
-                            Debug.DrawLine(aiCharacterManager.transform.position + offset,
+                            Debug.DrawLine(aiCharacterManager.transform.position,
                                 targetCharacter.transform.position,
                                 Color.green, 20f);
                             Debug.Log("FOUND TARGET");
@@ -98,7 +87,7 @@ namespace ProjectPipe
                 {
                     if (drawSightRays)
                     {
-                        Debug.DrawLine(aiCharacterManager.transform.position + offset,
+                        Debug.DrawLine(aiCharacterManager.transform.position,
                             targetCharacter.transform.position,
                             Color.yellow, 0.5f);
                         Debug.Log("OUT OF SIGHT");
