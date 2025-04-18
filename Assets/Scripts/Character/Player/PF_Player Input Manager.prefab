@@ -44,7 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0616aef2cbf79412990332f0805b7b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerManager: {fileID: 0}
   <CameraInput>k__BackingField: {x: 0, y: 0}
+  <LockOnInput>k__BackingField: 0
+  <ChangeLockOnToLeft>k__BackingField: 0
+  <ChangeLockOnToRight>k__BackingField: 0
   <MovementInput>k__BackingField: {x: 0, y: 0}
   <DodgeInput>k__BackingField: 0
   <JumpInput>k__BackingField: 0
@@ -54,3 +58,5 @@ MonoBehaviour:
   <ChargedAttackInput>k__BackingField: 0
   <ToggleWeaponInput>k__BackingField: 0
   attackToggleComposite: 0
+  queLightAttackInput: 0
+  queHeavyAttackInput: 0

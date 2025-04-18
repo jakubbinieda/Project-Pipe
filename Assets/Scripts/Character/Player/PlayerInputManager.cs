@@ -26,7 +26,16 @@ namespace ProjectPipe
         [field: SerializeField] public bool ToggleWeaponInput { get; set; }
         [SerializeField] private bool attackToggleComposite;
 
+        [Header("Queued Inputs")]
+        [SerializeField] private float queInputTimer;
+        [SerializeField] private float queInputMaxTime = 0.35f;
+        [SerializeField] private bool isQueInputActive;
+        [SerializeField] private bool queLightAttackInput;
+        [SerializeField] private bool queHeavyAttackInput;
+
         private PlayerControls _playerControls;
+
+        public PlayerManager PlayerManager { get; set; }
 
         private void Awake()
         {
@@ -38,6 +47,11 @@ namespace ProjectPipe
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void Update()
+        {
+            HandleQueuedInputs();
         }
 
         private void OnEnable()
@@ -73,9 +87,57 @@ namespace ProjectPipe
                 _playerControls.PlayerActions.ChargedAttack.performed += ctx => ChargedAttackInput = true;
                 _playerControls.PlayerActions.ChargedAttack.canceled += ctx => ChargedAttackInput = false;
                 _playerControls.PlayerActions.ToggleWeapon.performed += ctx => ToggleWeaponInput = true;
+
+                _playerControls.PlayerActions.QueLightAttack.performed += ctx =>
+                {
+                    if (!attackToggleComposite) EnqueueInput(ref queLightAttackInput);
+                };
+
+                _playerControls.PlayerActions.QueHeavyAttack.performed += ctx =>
+                {
+                    if (ctx.action.activeControl.device is Gamepad || attackToggleComposite)
+                        EnqueueInput(ref queHeavyAttackInput);
+                };
             }
 
             _playerControls.Enable();
+        }
+
+        private void EnqueueInput(ref bool queInput)
+        {
+            // TODO: Check for open UI
+
+            if (!PlayerManager) return;
+
+            if (!PlayerManager.IsPerformingAction && !PlayerManager.IsJumping) return;
+
+            queInput = true;
+            queInputTimer = queInputMaxTime;
+            isQueInputActive = true;
+        }
+
+        private void ProcessQueuedInputs()
+        {
+            if (queLightAttackInput) LightAttackInput = true;
+            if (queHeavyAttackInput) HeavyAttackInput = true;
+        }
+
+        private void HandleQueuedInputs()
+        {
+            if (!isQueInputActive) return;
+
+            if (queInputTimer > 0)
+            {
+                queInputTimer -= Time.deltaTime;
+                ProcessQueuedInputs();
+            }
+            else
+            {
+                queLightAttackInput = false;
+                queHeavyAttackInput = false;
+                isQueInputActive = false;
+                queInputTimer = 0;
+            }
         }
     }
 }
