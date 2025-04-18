@@ -14,9 +14,6 @@ namespace ProjectPipe
             if (!attacker.CharacterStatsManager.CanAffordStaminaCost(weapon.BaseStaminaCost *
                                                                      weapon.LightAttackStaminaMultiplier)) return;
 
-            attacker.CharacterStatsManager.SpendStamina(weapon.BaseStaminaCost * weapon.LightAttackStaminaMultiplier);
-
-
             if (attacker.IsSprinting)
                 PerformRunAttack(attacker, weapon);
             else if (attacker.CharacterCombatManager.CanDoRollAttack)
@@ -44,6 +41,9 @@ namespace ProjectPipe
                             "Main_Light_Attack_01", true);
                         break;
                 }
+
+                attacker.CharacterStatsManager.SpendStamina(
+                    weapon.BaseStaminaCost * weapon.LightAttackStaminaMultiplier);
             }
             else if (!attacker.IsPerformingAction)
             {
@@ -56,6 +56,7 @@ namespace ProjectPipe
         {
             attacker.CharacterAnimatorManager.PlayTargetAttackActionAnimation(AttackType.RunAttack01,
                 "Main_Run_Attack_01", true);
+            attacker.CharacterStatsManager.SpendStamina(weapon.BaseStaminaCost * weapon.LightAttackStaminaMultiplier);
         }
 
         private void PerformRollAttack(CharacterManager attacker, WeaponItem weapon)
@@ -63,6 +64,7 @@ namespace ProjectPipe
             attacker.CharacterCombatManager.DisableCanDoRollAttack();
             attacker.CharacterAnimatorManager.PlayTargetAttackActionAnimation(AttackType.RollAttack01,
                 "Main_Roll_Attack_01", true);
+            attacker.CharacterStatsManager.SpendStamina(weapon.BaseStaminaCost * weapon.LightAttackStaminaMultiplier);
         }
 
         private void PerformBackstepAttack(CharacterManager attacker, WeaponItem weapon)
@@ -70,6 +72,7 @@ namespace ProjectPipe
             attacker.CharacterCombatManager.DisableCanDoBackstepAttack();
             attacker.CharacterAnimatorManager.PlayTargetAttackActionAnimation(AttackType.BackstepAttack01,
                 "Main_Backstep_Attack_01", true);
+            attacker.CharacterStatsManager.SpendStamina(weapon.BaseStaminaCost * weapon.LightAttackStaminaMultiplier);
         }
     }
 }
