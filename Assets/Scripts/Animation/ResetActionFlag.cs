@@ -16,7 +16,9 @@ namespace ProjectPipe
             _characterManager.CanMove = true;
             _characterManager.CanRotate = true;
             _characterManager.IsJumping = false;
-            _characterManager.CharacterCombatManager.DisableCombo();
+            _characterManager.CharacterCombatManager.DisableCanDoCombo();
+            _characterManager.CharacterCombatManager.DisableCanDoBackstepAttack();
+            _characterManager.CharacterCombatManager.DisableCanDoRollAttack();
             _characterManager.CharacterLocomotionManager.IsRolling = false;
         }
 

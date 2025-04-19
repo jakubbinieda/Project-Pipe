@@ -25,6 +25,7 @@ namespace ProjectPipe
         {
             base.Start();
 
+            PlayerInputManager.Instance.PlayerManager = this;
             PlayerCamera.Instance.PlayerManager = this;
 
             // TODO: Think of something better
