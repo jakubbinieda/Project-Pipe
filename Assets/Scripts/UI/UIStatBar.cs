@@ -5,11 +5,15 @@ namespace ProjectPipe
 {
     public class UIStatBar : MonoBehaviour
     {
-        private Slider _slider;
+        protected Slider _slider;
 
         protected virtual void Awake()
         {
             _slider = GetComponent<Slider>();
+        }
+        
+        protected virtual void Start()
+        {
         }
 
         public virtual void SetStat(int newValue)

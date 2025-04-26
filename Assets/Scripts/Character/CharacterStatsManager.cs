@@ -13,18 +13,28 @@ namespace ProjectPipe
         [SerializeField] private float staminaRegenerationCooldown = 2;
 
         private CharacterManager _characterManager;
+        private CharacterUIManager _uiManager;
+        
         private float _staminaRegenerationTickTimer;
         private float _staminaRegenerationTimer;
 
         protected virtual void Awake()
         {
             _characterManager = GetComponent<CharacterManager>();
+            _uiManager = GetComponentInChildren<CharacterUIManager>();
         }
 
         protected virtual void Start()
         {
             currentStamina.OnValueChanged += ResetStaminaRegenerationTimer;
             currentHealth.OnValueChanged += CheckHP;
+            
+            maxHealth.OnValueChanged += _uiManager.SetMaxHealthValue;
+            currentHealth.OnValueChanged += _uiManager.OnHPChange;
+    
+            // This will probably not be needed in the future
+            // Now we don't use SetMaxHealth anywhere
+            _uiManager.SetMaxHealthValue(maxHealth.Value, maxHealth.Value);
         }
 
         protected void Update()
