@@ -32,7 +32,7 @@ namespace ProjectPipe
         protected override void Update()
         {
             base.Update();
-
+            
             if (PlayerInputManager.Instance.DodgeInput)
             {
                 PlayerInputManager.Instance.DodgeInput = false;
@@ -53,7 +53,7 @@ namespace ProjectPipe
         private void HandleGroundedLocomotion()
         {
             if (!_playerManager.CanMove) return;
-
+            
             _playerManager.IsSprinting = PlayerInputManager.Instance.MovementInput.magnitude != 0 &&
                                          PlayerInputManager.Instance.SprintInput;
 

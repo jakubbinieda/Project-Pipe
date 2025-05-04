@@ -9,8 +9,7 @@ namespace ProjectPipe
     {
         public override AIState Tick(AICharacterManager aiCharacterManager)
         {
-            if (aiCharacterManager.AICharacterCombatManager.CurrentTarget != null
-                && aiCharacterManager.isNavMeshAgentEnabled)
+            if (aiCharacterManager.AICharacterCombatManager.CurrentTarget != null)
             {
                 return SwitchState(aiCharacterManager, aiCharacterManager.PursueTargetState);
             }

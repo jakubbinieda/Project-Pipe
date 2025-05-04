@@ -1,37 +1,44 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace ProjectPipe
 {
     public class AICharacterManager : CharacterManager
     {
-        public AICharacterCombatManager AICharacterCombatManager { get; private set; }
+        [field: Header("AI Specific Flags")]
+        [field: SerializeField] public bool IsMoving { get; private set; }
 
         [field: Header("Current State")]
         [field: SerializeField] private AIState CurrentState { get; set; }
 
-        [field: Header("Navmesh Agent")]
-        [field: SerializeField] public bool isNavMeshAgentEnabled; // TEMPORARY
-
+        [field: Header("Nav Mesh Agent")]
+        // [field: SerializeField] public bool hasNavMeshAgent; // TEMPORARY
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
 
         [field: Header("States")]
         [field: SerializeField] public IdleState IdleState { get; private set; }
+
         [field: SerializeField] public PursueTargetState PursueTargetState { get; private set; }
-        
+
+        // Maybe should be moved to AICharacterAnimatorManager
+        private int _isMovingHash;
+        public AICharacterCombatManager AICharacterCombatManager { get; private set; }
+        public AICharacterLocomotionManager AICharacterLocomotionManager { get; private set; }
+
         protected override void Awake()
         {
             base.Awake();
 
             AICharacterCombatManager = GetComponent<AICharacterCombatManager>();
-            if (isNavMeshAgentEnabled)
-            {
-                NavMeshAgent = GetComponent<NavMeshAgent>();
-            }
+            AICharacterLocomotionManager = GetComponent<AICharacterLocomotionManager>();
+
+            NavMeshAgent = GetComponentInChildren<NavMeshAgent>();
+            NavMeshAgent.enabled = false; // STUPID UNITY
+
             IdleState = Instantiate(IdleState);
             PursueTargetState = Instantiate(PursueTargetState);
             CurrentState = IdleState;
+            _isMovingHash = Animator.StringToHash("isMoving");
         }
 
         protected override void FixedUpdate()
@@ -39,30 +46,42 @@ namespace ProjectPipe
             base.FixedUpdate();
             ProcessStateMachine();
         }
-        
+
         private void ProcessStateMachine()
         {
-            AIState nextState = CurrentState?.Tick(this);
-            if (nextState != null)
+            var nextState = CurrentState?.Tick(this);
+            if (nextState != null) CurrentState = nextState;
+
+            // This fixes rotation issues
+            NavMeshAgent.transform.localPosition = Vector3.zero;
+            NavMeshAgent.transform.localRotation = Quaternion.identity;
+
+            if (NavMeshAgent.enabled)
             {
-                CurrentState = nextState;
-            }
-            
-            if (isNavMeshAgentEnabled)
-            {
-                Vector3 agentDestination = NavMeshAgent.destination;
-                float remainingDistance = Vector3.Distance(transform.position, agentDestination);
-                if (remainingDistance > NavMeshAgent.stoppingDistance)
+                var agentDestination = NavMeshAgent.destination;
+                var agentRemainingDistance = Vector3.Distance(agentDestination, transform.position);
+
+                Debug.Log("DISTANCE TO TARGET: " + agentRemainingDistance);
+
+                if (agentRemainingDistance > NavMeshAgent.stoppingDistance)
                 {
-                    NavMeshAgent.isStopped = false;
+                    Debug.Log("I AM COMING FOR YOU");
+                    IsMoving = true;
+                    Animator.SetBool(_isMovingHash, true);
+                    ApplyRootMotion = true; // This should keep the agent stick to root
                 }
                 else
                 {
-                    NavMeshAgent.isStopped = true;
+                    Debug.Log("I GOT YOU");
+                    IsMoving = false;
+                    Animator.SetBool(_isMovingHash, false);
                 }
             }
-            
+            else
+            {
+                IsMoving = false;
+                Animator.SetBool(_isMovingHash, false);
+            }
         }
-
     }
 }

@@ -18,6 +18,8 @@ namespace ProjectPipe
             if (!aiCharacterManager.NavMeshAgent.enabled)
                 aiCharacterManager.NavMeshAgent.enabled = true;
             
+            aiCharacterManager.AICharacterLocomotionManager.RotateTowardsAgent(aiCharacterManager);
+            
             NavMeshPath path = new NavMeshPath();
             aiCharacterManager.NavMeshAgent.CalculatePath(aiCharacterManager.AICharacterCombatManager.CurrentTarget.transform.position, path);
             aiCharacterManager.NavMeshAgent.SetPath(path);
