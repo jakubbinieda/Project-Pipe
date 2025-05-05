@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ProjectPipe
 {
@@ -8,12 +9,22 @@ namespace ProjectPipe
         [field: SerializeField] private bool drawVisionCone = true;
         [field: SerializeField] private bool drawSightRays = true;
 
-        [field: Header("Current Target")]
+        [field: Header("Action Recovery")]
+        public float actionRecoveryTime = 0;
+        
+        [field: Header("Attack Rotation Speed")]
+        [field: SerializeField] public float attackRotationSpeed = 25f;
+
+        [field: Header("Target Info")]
         [field: SerializeField] public CharacterManager CurrentTarget { get; private set; }
+        [field: SerializeField] public float ViewableAngle { get; set; }
+        [field: SerializeField] public Vector3 TargetsDirection { get; set; }
+        [field: SerializeField] public float DistanceFromTarget { get; set; }
 
         [field: Header("Sight")]
         [field: SerializeField] private float sightRange = 17f;
-        [field: SerializeField] private float sightAngle = 20f;
+
+        public float FOV { get; set; } = 20f;
 
         protected override void Update()
         {
@@ -27,7 +38,7 @@ namespace ProjectPipe
            for (int i = 0; i < rayCount; i++)
            {
                float lerpFactor = (float)i / (rayCount - 1);
-               float angle = Mathf.Lerp(-sightAngle, sightAngle, lerpFactor);
+               float angle = Mathf.Lerp(-FOV, FOV, lerpFactor);
        
                Quaternion rayRotation = Quaternion.Euler(0, angle, 0);
                Vector3 rayDirection = rayRotation * forward * sightRange;
@@ -54,9 +65,9 @@ namespace ProjectPipe
 
                 var targetDirection = 
                     targetCharacter.transform.position - aiCharacterManager.transform.position;
-                var viewableAngle = Vector3.Angle(targetDirection, aiCharacterManager.transform.forward);
+                var angleOfPotentialTarget = Vector3.Angle(targetDirection, aiCharacterManager.transform.forward);
 
-                if (viewableAngle < sightAngle && viewableAngle > -sightAngle)
+                if (angleOfPotentialTarget < FOV && angleOfPotentialTarget > -FOV)
                 {
                     if (Physics.Linecast(aiCharacterManager.transform.position,
                             targetCharacter.transform.position,
@@ -79,8 +90,12 @@ namespace ProjectPipe
                                 Color.green, 20f);
                             Debug.Log("FOUND TARGET");
                         }
-
-                        aiCharacterManager.AICharacterCombatManager.CurrentTarget = targetCharacter;
+                        
+                        CurrentTarget = targetCharacter;
+                        this.TargetsDirection =
+                            CurrentTarget.transform.position - transform.position;
+                        this.ViewableAngle = WorldUtilityManager.Instance.GetAngleOfTarget(transform, TargetsDirection);
+                        PivotTowardsTarget(targetCharacter);
                     }
                 }
                 else
@@ -94,6 +109,60 @@ namespace ProjectPipe
                     }
                 }
             }
+        }
+        
+        public  void PivotTowardsTarget(CharacterManager targetCharacter)
+        {
+            if (_characterManager.IsPerformingAction) return;
+
+            // TODO when i have animations
+            
+            // if (ViewableAngle >= 20 && ViewableAngle <= 60)
+            // {
+            //     _characterManager.CharacterAnimatorManager.PlayTargetAnimation("there will be", true, true);
+            //     
+            // } else if ()
+        }
+        
+        public void HandleActionRecovery(AICharacterManager aiCharacterManager)
+        {
+            if (actionRecoveryTime > 0)
+            {
+                if (!aiCharacterManager.IsPerformingAction)
+                {
+                    actionRecoveryTime -= Time.deltaTime;
+                }
+              
+            }
+        }
+
+        public void RotateTowardsAgent(AICharacterManager aiCharacterManager)
+        {
+            if (aiCharacterManager.IsMoving)
+            {
+                aiCharacterManager.transform.rotation = aiCharacterManager.NavMeshAgent.transform.rotation;
+            }
+        }
+
+        public void RotateTowardsTargetWhileAttacking(AICharacterManager aiCharacterManager)
+        {
+            if (CurrentTarget == null) return;
+
+            if (!aiCharacterManager.CanRotate) return;
+
+            if (!aiCharacterManager.IsPerformingAction) return;
+            
+            Vector3 targetDirection = CurrentTarget.transform.position - aiCharacterManager.transform.position;
+            targetDirection.y = 0;
+            targetDirection.Normalize();
+
+            if (targetDirection == Vector3.zero)
+            {
+                targetDirection = aiCharacterManager.transform.forward;
+            }
+            
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+            aiCharacterManager.transform.rotation = Quaternion.Slerp(aiCharacterManager.transform.rotation, targetRotation, attackRotationSpeed * Time.deltaTime);
         }
     }
 }

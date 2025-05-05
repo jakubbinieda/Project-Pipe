@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -66,6 +67,10 @@ namespace ProjectPipe
         }
 
         protected virtual void FixedUpdate()
+        {
+        }
+
+        protected virtual void Update()
         {
         }
     }

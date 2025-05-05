@@ -17,8 +17,23 @@ namespace ProjectPipe
             
             if (!aiCharacterManager.NavMeshAgent.enabled)
                 aiCharacterManager.NavMeshAgent.enabled = true;
+
+            if (aiCharacterManager.AICharacterCombatManager.ViewableAngle <
+                aiCharacterManager.AICharacterCombatManager.FOV
+                || aiCharacterManager.AICharacterCombatManager.ViewableAngle >
+                aiCharacterManager.AICharacterCombatManager.FOV)
+            {
+                aiCharacterManager.AICharacterCombatManager.PivotTowardsTarget(aiCharacterManager);
+            }
             
             aiCharacterManager.AICharacterLocomotionManager.RotateTowardsAgent(aiCharacterManager);
+
+            if (aiCharacterManager.AICharacterCombatManager.DistanceFromTarget <=
+                aiCharacterManager.NavMeshAgent.stoppingDistance)
+            {
+                return SwitchState(aiCharacterManager, aiCharacterManager.CombatStanceState);
+            }
+            
             
             NavMeshPath path = new NavMeshPath();
             aiCharacterManager.NavMeshAgent.CalculatePath(aiCharacterManager.AICharacterCombatManager.CurrentTarget.transform.position, path);

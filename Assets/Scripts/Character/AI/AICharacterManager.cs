@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,6 +20,8 @@ namespace ProjectPipe
         [field: SerializeField] public IdleState IdleState { get; private set; }
 
         [field: SerializeField] public PursueTargetState PursueTargetState { get; private set; }
+        [field: SerializeField] public CombatStanceState CombatStanceState { get; private set; }
+        [field: SerializeField] public AttackState AttackState { get; private set; }
 
         // Maybe should be moved to AICharacterAnimatorManager
         private int _isMovingHash;
@@ -37,7 +40,10 @@ namespace ProjectPipe
 
             IdleState = Instantiate(IdleState);
             PursueTargetState = Instantiate(PursueTargetState);
+            CombatStanceState = Instantiate(CombatStanceState);
+            AttackState = Instantiate(AttackState);
             CurrentState = IdleState;
+            
             _isMovingHash = Animator.StringToHash("isMoving");
         }
 
@@ -45,6 +51,13 @@ namespace ProjectPipe
         {
             base.FixedUpdate();
             ProcessStateMachine();
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+            AICharacterCombatManager.HandleActionRecovery(this);
+            
         }
 
         private void ProcessStateMachine()
@@ -55,6 +68,17 @@ namespace ProjectPipe
             // This fixes rotation issues
             NavMeshAgent.transform.localPosition = Vector3.zero;
             NavMeshAgent.transform.localRotation = Quaternion.identity;
+
+            if (AICharacterCombatManager.CurrentTarget != null)
+            {
+                AICharacterCombatManager.TargetsDirection =
+                    AICharacterCombatManager.CurrentTarget.transform.position - transform.position;
+                AICharacterCombatManager.ViewableAngle = WorldUtilityManager.Instance.GetAngleOfTarget(
+                    transform,
+                    AICharacterCombatManager.TargetsDirection);
+                AICharacterCombatManager.DistanceFromTarget =
+                    Vector3.Distance(transform.position, AICharacterCombatManager.CurrentTarget.transform.position);
+            }
 
             if (NavMeshAgent.enabled)
             {
