@@ -5,15 +5,15 @@ namespace ProjectPipe
     [CreateAssetMenu(menuName = "AI/States/AttackState")]
     public class AttackState : AIState
     {
-        [HideInInspector] public AICharacterAttackAction currentAttack;
-        [HideInInspector] public bool willPerformCombo;
-        
         [field: Header("State Flags")]
-        protected bool hasPerformedAttack = false;
-        protected bool hasPerformedCombo = false;
+        [field: SerializeField] protected bool hasPerformedAttack = false;
+        [field: SerializeField] protected bool hasPerformedCombo = false;
         
         [field: Header("Pivot After Attack")]
         [field: SerializeField] protected bool pivotAfterAttack = false;
+        
+        [HideInInspector] public AICharacterAttackAction currentAttack;
+        [HideInInspector] public bool willPerformCombo;
 
         public override AIState Tick(AICharacterManager aiCharacterManager)
         {
@@ -33,6 +33,8 @@ namespace ProjectPipe
             {
                 if (currentAttack.comboAction != null)
                 {
+                    // TODO: Implement combo action
+                    
                     // hasPerformedCombo = true;
                     // currentAttack.comboAction.AttempToPerformAction(aiCharacterManager);
                 }
@@ -41,30 +43,25 @@ namespace ProjectPipe
             if (!hasPerformedAttack)
             {
                 if (aiCharacterManager.AICharacterCombatManager.actionRecoveryTime > 0)
-                {
                     return this;
-                }
-
+                
                 if (aiCharacterManager.IsPerformingAction)
-                {
                     return this;
-                }
                 
                 PerformAttack(aiCharacterManager);
                 return this;
             }
 
             if (pivotAfterAttack)
-            {
                 aiCharacterManager.AICharacterCombatManager.PivotTowardsTarget(aiCharacterManager);
-            }
+            
             return SwitchState(aiCharacterManager, aiCharacterManager.CombatStanceState);
         }
 
         protected void PerformAttack(AICharacterManager aiCharacterManager)
         {
             hasPerformedAttack = true;
-            currentAttack.AttempToPerformAction(aiCharacterManager);
+            currentAttack.AttemptToPerformAction(aiCharacterManager);
             aiCharacterManager.AICharacterCombatManager.actionRecoveryTime = currentAttack.actionRecoveryTime;
             
         }

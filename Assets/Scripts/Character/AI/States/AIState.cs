@@ -8,15 +8,13 @@ namespace ProjectPipe
         {
             return this;
         }
-
+        
         protected virtual AIState SwitchState(AICharacterManager aiCharacterManager, AIState newState)
         {
             ResetStateFlags(aiCharacterManager);
             return newState;
         }
 
-        protected virtual void ResetStateFlags(AICharacterManager aiCharacterManager)
-        {
-        }
+        protected virtual void ResetStateFlags(AICharacterManager aiCharacterManager) {}
     }
 }

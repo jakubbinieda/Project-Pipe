@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,26 +6,25 @@ namespace ProjectPipe
     public class AICharacterManager : CharacterManager
     {
         [field: Header("AI Specific Flags")]
-        [field: SerializeField] public bool IsMoving { get; private set; }
-
-        [field: Header("Current State")]
-        [field: SerializeField] private AIState CurrentState { get; set; }
-
+        [field: SerializeField] public bool isMoving;
+        
         [field: Header("Nav Mesh Agent")]
-        // [field: SerializeField] public bool hasNavMeshAgent; // TEMPORARY
         [field: SerializeField] public NavMeshAgent NavMeshAgent { get; private set; }
+        
+        [field: Header("Current State")]
+        [field: SerializeField] public AIState CurrentState { get; private set; }
 
         [field: Header("States")]
         [field: SerializeField] public IdleState IdleState { get; private set; }
-
         [field: SerializeField] public PursueTargetState PursueTargetState { get; private set; }
         [field: SerializeField] public CombatStanceState CombatStanceState { get; private set; }
         [field: SerializeField] public AttackState AttackState { get; private set; }
+        
+        public AICharacterCombatManager AICharacterCombatManager { get; private set; }
+        public AICharacterLocomotionManager AICharacterLocomotionManager { get; private set; }
 
         // Maybe should be moved to AICharacterAnimatorManager
         private int _isMovingHash;
-        public AICharacterCombatManager AICharacterCombatManager { get; private set; }
-        public AICharacterLocomotionManager AICharacterLocomotionManager { get; private set; }
 
         protected override void Awake()
         {
@@ -57,7 +55,6 @@ namespace ProjectPipe
         {
             base.Update();
             AICharacterCombatManager.HandleActionRecovery(this);
-            
         }
 
         private void ProcessStateMachine()
@@ -80,6 +77,7 @@ namespace ProjectPipe
                     Vector3.Distance(transform.position, AICharacterCombatManager.CurrentTarget.transform.position);
             }
 
+            
             if (NavMeshAgent.enabled)
             {
                 var agentDestination = NavMeshAgent.destination;
@@ -90,20 +88,20 @@ namespace ProjectPipe
                 if (agentRemainingDistance > NavMeshAgent.stoppingDistance)
                 {
                     Debug.Log("I AM COMING FOR YOU");
-                    IsMoving = true;
-                    Animator.SetBool(_isMovingHash, true);
+                    isMoving = true;
                     ApplyRootMotion = true; // This should keep the agent stick to root
+                    Animator.SetBool(_isMovingHash, true);
                 }
                 else
                 {
                     Debug.Log("I GOT YOU");
-                    IsMoving = false;
+                    isMoving = false;
                     Animator.SetBool(_isMovingHash, false);
                 }
             }
             else
             {
-                IsMoving = false;
+                isMoving = false;
                 Animator.SetBool(_isMovingHash, false);
             }
         }

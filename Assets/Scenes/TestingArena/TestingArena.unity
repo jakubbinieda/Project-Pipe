@@ -320,15 +320,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CanPerformCombo>k__BackingField: 0
   <LastAttackAnimation>k__BackingField: 
-  drawVisionCone: 1
-  drawSightRays: 1
-  actionRecoveryTime: 0
-  attackRotationSpeed: 25
   <CurrentTarget>k__BackingField: {fileID: 0}
   <ViewableAngle>k__BackingField: 0
   <TargetsDirection>k__BackingField: {x: 0, y: 0, z: 0}
   <DistanceFromTarget>k__BackingField: 0
+  actionRecoveryTime: 0
+  attackRotationSpeed: 25
   sightRange: 17
+  fov: 20
+  drawVisionCone: 1
+  drawSightRays: 1
 --- !u!114 &3953900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,9 +369,9 @@ MonoBehaviour:
   <IsPerformingAction>k__BackingField: 0
   <IsSprinting>k__BackingField: 0
   <IsDead>k__BackingField: 0
-  <IsMoving>k__BackingField: 0
-  <CurrentState>k__BackingField: {fileID: 11400000, guid: 24c9efea17c8f17ee865b624d1682b04, type: 2}
+  isMoving: 0
   <NavMeshAgent>k__BackingField: {fileID: 0}
+  <CurrentState>k__BackingField: {fileID: 11400000, guid: 24c9efea17c8f17ee865b624d1682b04, type: 2}
   <IdleState>k__BackingField: {fileID: 11400000, guid: 24c9efea17c8f17ee865b624d1682b04, type: 2}
   <PursueTargetState>k__BackingField: {fileID: 11400000, guid: d320e5019d406929c93a9201ff9108fb, type: 2}
   <CombatStanceState>k__BackingField: {fileID: 11400000, guid: 841cc6b30ae885041a9358955035af8d, type: 2}
@@ -978,10 +979,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f63b261d0dfc9b0019d2bc1d505a3733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CharacterLayers>k__BackingField:
+  characterLayers:
     serializedVersion: 2
     m_Bits: 64
-  <EnvironmentLayers>k__BackingField:
+  environmentLayers:
     serializedVersion: 2
     m_Bits: 1024
 --- !u!4 &373011335
@@ -4426,6 +4427,14 @@ PrefabInstance:
     - target: {fileID: 1067834675381225336, guid: 46f1068a70083c135a602d268c60ff76, type: 3}
       propertyPath: m_Name
       value: PF_World Utility Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119914907294192964, guid: 46f1068a70083c135a602d268c60ff76, type: 3}
+      propertyPath: characterLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7119914907294192964, guid: 46f1068a70083c135a602d268c60ff76, type: 3}
+      propertyPath: environmentLayers.m_Bits
+      value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 8415686003061293899, guid: 46f1068a70083c135a602d268c60ff76, type: 3}
       propertyPath: m_LocalPosition.x

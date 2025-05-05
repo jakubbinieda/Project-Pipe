@@ -12,10 +12,11 @@ namespace ProjectPipe
         [field: Header("AI Characters")]
         [field: SerializeField] private GameObject[] aiCharacters;
         [field: SerializeField] private List<GameObject> aiCharactersSpawned;
-        
+
+
         [field: Header("Debug")]
-        [field: SerializeField] private bool despawnAICharacters;
-        [field: SerializeField] private bool respawnAICharacters;
+        [field: SerializeField] private bool DespawnAICharacters { get; set; }
+        [field: SerializeField] private bool RespawnAICharacters { get; set; }
         
         private void Awake()
         {
@@ -36,16 +37,16 @@ namespace ProjectPipe
         
         private void Update()
         {
-            if (despawnAICharacters)
+            if (DespawnAICharacters)
             {
                 DespawnAllCharacters();
-                despawnAICharacters = false;
+                DespawnAICharacters = false;
             }
 
-            if (respawnAICharacters)
+            if (RespawnAICharacters)
             {
                 SpawnAllCharacters();
-                respawnAICharacters = false;
+                RespawnAICharacters = false;
             }
         }
 

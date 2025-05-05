@@ -1,30 +1,28 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ProjectPipe
 {
     public class AICharacterCombatManager : CharacterCombatManager
     {
-        [field: Header("Debug")]
-        [field: SerializeField] private bool drawVisionCone = true;
-        [field: SerializeField] private bool drawSightRays = true;
-
-        [field: Header("Action Recovery")]
-        public float actionRecoveryTime = 0;
-        
-        [field: Header("Attack Rotation Speed")]
-        [field: SerializeField] public float attackRotationSpeed = 25f;
-
         [field: Header("Target Info")]
         [field: SerializeField] public CharacterManager CurrentTarget { get; private set; }
         [field: SerializeField] public float ViewableAngle { get; set; }
         [field: SerializeField] public Vector3 TargetsDirection { get; set; }
         [field: SerializeField] public float DistanceFromTarget { get; set; }
-
+        
+        [field: Header("Action Recovery")]
+        public float actionRecoveryTime = 0;
+        
+        [field: Header("Attack Rotation Speed")]
+        [field: SerializeField] public float attackRotationSpeed = 25f;
+        
         [field: Header("Sight")]
         [field: SerializeField] private float sightRange = 17f;
+        public float fov  = 20f;
 
-        public float FOV { get; set; } = 20f;
+        [field: Header("Debug")]
+        [field: SerializeField] private bool drawVisionCone = true;
+        [field: SerializeField] private bool drawSightRays = true;
 
         protected override void Update()
         {
@@ -32,13 +30,13 @@ namespace ProjectPipe
             if (drawVisionCone) DrawVisionCone(transform.position, transform.forward);
         }
 
-        // This is debug only function
+        // This is the debug-only function
        private void DrawVisionCone(Vector3 origin, Vector3 forward, int rayCount = 20)
        {
            for (int i = 0; i < rayCount; i++)
            {
                float lerpFactor = (float)i / (rayCount - 1);
-               float angle = Mathf.Lerp(-FOV, FOV, lerpFactor);
+               float angle = Mathf.Lerp(-fov, fov, lerpFactor);
        
                Quaternion rayRotation = Quaternion.Euler(0, angle, 0);
                Vector3 rayDirection = rayRotation * forward * sightRange;
@@ -54,7 +52,7 @@ namespace ProjectPipe
             var colliders = Physics.OverlapSphere(
                 aiCharacterManager.transform.position,
                 sightRange,
-                WorldUtilityManager.Instance.CharacterLayers);
+                WorldUtilityManager.Instance.characterLayers);
 
             for (var i = 0; i < colliders.Length; i++)
             {
@@ -62,16 +60,16 @@ namespace ProjectPipe
                 if (targetCharacter == null) continue;
                 if (targetCharacter == aiCharacterManager) continue;
                 if (targetCharacter.IsDead) continue;
-
+                
                 var targetDirection = 
                     targetCharacter.transform.position - aiCharacterManager.transform.position;
                 var angleOfPotentialTarget = Vector3.Angle(targetDirection, aiCharacterManager.transform.forward);
 
-                if (angleOfPotentialTarget < FOV && angleOfPotentialTarget > -FOV)
+                if (angleOfPotentialTarget < fov && angleOfPotentialTarget > -fov)
                 {
                     if (Physics.Linecast(aiCharacterManager.transform.position,
                             targetCharacter.transform.position,
-                            WorldUtilityManager.Instance.EnvironmentLayers))
+                            WorldUtilityManager.Instance.environmentLayers))
                     {
                         if (drawSightRays)
                         {
@@ -115,7 +113,7 @@ namespace ProjectPipe
         {
             if (_characterManager.IsPerformingAction) return;
 
-            // TODO when i have animations
+            // TODO when i have turn animations
             
             // if (ViewableAngle >= 20 && ViewableAngle <= 60)
             // {
@@ -138,7 +136,7 @@ namespace ProjectPipe
 
         public void RotateTowardsAgent(AICharacterManager aiCharacterManager)
         {
-            if (aiCharacterManager.IsMoving)
+            if (aiCharacterManager.isMoving)
             {
                 aiCharacterManager.transform.rotation = aiCharacterManager.NavMeshAgent.transform.rotation;
             }

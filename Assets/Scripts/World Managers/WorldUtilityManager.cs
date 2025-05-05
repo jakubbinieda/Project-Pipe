@@ -5,10 +5,10 @@ namespace ProjectPipe
     public class WorldUtilityManager : MonoBehaviour
     {
         public static WorldUtilityManager Instance { get; private set; }
-        
+
         [field: Header("Layers")]
-        [field: SerializeField] public LayerMask CharacterLayers { get; private set; }
-        [field: SerializeField] public LayerMask EnvironmentLayers { get; private set; }
+        [field: SerializeField] public LayerMask characterLayers;
+        [field: SerializeField] public LayerMask environmentLayers;
 
         private void Awake()
         {
@@ -25,8 +25,8 @@ namespace ProjectPipe
         public float GetAngleOfTarget(Transform characterTransform, Vector3 targetsDirection)
         {
             targetsDirection.y = 0;
-            float viewableAnge = Vector3.Angle(characterTransform.forward, targetsDirection);
-            Vector3 cross = Vector3.Cross(characterTransform.forward, targetsDirection);
+            var viewableAnge = Vector3.Angle(characterTransform.forward, targetsDirection);
+            var cross = Vector3.Cross(characterTransform.forward, targetsDirection);
             if (cross.y < 0)
             {
                 viewableAnge = -viewableAnge;

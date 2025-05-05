@@ -17,5 +17,8 @@ namespace ProjectPipe
         protected virtual void Update()
         {
         }
+        
+        public virtual void OpenDamageCollider() {}
+        public virtual void CloseDamageCollider() {}
     }
 }

@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-
 namespace ProjectPipe
 {
     public class PlayerStatsManager : CharacterStatsManager

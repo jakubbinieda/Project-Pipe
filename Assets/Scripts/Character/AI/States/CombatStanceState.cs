@@ -8,20 +8,21 @@ namespace ProjectPipe
     public class CombatStanceState : AIState
     {
         [field: Header("Attacks")]
+        [field: SerializeField] protected List<AICharacterAttackAction> potentialAttacks;
+        [field: SerializeField] protected bool hasAttack = false;
         public List<AICharacterAttackAction> aiCharacterAttacks;
-        protected List<AICharacterAttackAction> potentialAttacks;
-        private AICharacterAttackAction chosenAttack;
-        private AICharacterAttackAction previousAttack;
-        protected bool hasAttack = false;
         
         [field: Header("Combo")]
         [field: SerializeField] protected bool canPerformCombo;
         [field: SerializeField] protected bool chanceToPerformCombo;
-        [field: SerializeField] private bool hasRolledForComboOnce = false;
+        [field: SerializeField] protected bool hasRolledForComboOnce = false;
         
         [field: Header("Engagement Distance")]
-        [field: SerializeField] public float maximumEngagementDistance = 5;
+        public float maximumEngagementDistance = 5;
 
+        private AICharacterAttackAction _chosenAttack;
+        private AICharacterAttackAction _previousAttack;
+        
         public override AIState Tick(AICharacterManager aiCharacterManager)
         {
             if (aiCharacterManager.IsPerformingAction)
@@ -30,9 +31,9 @@ namespace ProjectPipe
             if(!aiCharacterManager.NavMeshAgent.enabled)
                 aiCharacterManager.NavMeshAgent.enabled = true;
 
-            if (!aiCharacterManager.IsMoving)
+            if (!aiCharacterManager.isMoving)
             {
-                // TODO: remove hardcoded values
+                // TODO: remove hardcoded values, when tested empirically
                 if (aiCharacterManager.AICharacterCombatManager.ViewableAngle < -30 ||
                     aiCharacterManager.AICharacterCombatManager.ViewableAngle > 30)
                 {
@@ -43,9 +44,8 @@ namespace ProjectPipe
             aiCharacterManager.AICharacterCombatManager.RotateTowardsAgent(aiCharacterManager);
 
             if (aiCharacterManager.AICharacterCombatManager.CurrentTarget == null)
-            {
-                    return SwitchState(aiCharacterManager, aiCharacterManager.IdleState);
-            }
+                return SwitchState(aiCharacterManager, aiCharacterManager.IdleState);
+            
 
             if (!hasAttack)
             {
@@ -53,7 +53,7 @@ namespace ProjectPipe
             }
             else
             {
-                aiCharacterManager.AttackState.currentAttack = chosenAttack;
+                aiCharacterManager.AttackState.currentAttack = _chosenAttack;
                 return SwitchState(aiCharacterManager, aiCharacterManager.AttackState);
             }
                 
@@ -62,7 +62,7 @@ namespace ProjectPipe
                 return SwitchState(aiCharacterManager, aiCharacterManager.PursueTargetState);
             }
             
-            NavMeshPath path = new NavMeshPath();
+            var path = new NavMeshPath();
             aiCharacterManager.NavMeshAgent.CalculatePath(aiCharacterManager.AICharacterCombatManager.CurrentTarget.transform.position, path);
             aiCharacterManager.NavMeshAgent.SetPath(path);
             return this; 
@@ -77,9 +77,9 @@ namespace ProjectPipe
                     continue;
                 if (potentialAttack.maximumAttackDistance < aiCharacterManager.AICharacterCombatManager.DistanceFromTarget)
                     continue;
-                if (-potentialAttack.FOA > aiCharacterManager.AICharacterCombatManager.ViewableAngle)
+                if (-potentialAttack.foa > aiCharacterManager.AICharacterCombatManager.ViewableAngle)
                     continue;
-                if (potentialAttack.FOA < aiCharacterManager.AICharacterCombatManager.ViewableAngle)
+                if (potentialAttack.foa < aiCharacterManager.AICharacterCombatManager.ViewableAngle)
                     continue;
                 potentialAttacks.Add(potentialAttack);
                 
@@ -101,8 +101,8 @@ namespace ProjectPipe
                 processedWeight += attack.attackWeight;
                 if (randomWeight <= processedWeight)
                 {
-                    chosenAttack = attack;
-                    previousAttack = chosenAttack;
+                    _chosenAttack = attack;
+                    _previousAttack = _chosenAttack;
                     hasAttack = true;
                     return;
                 }
@@ -112,13 +112,11 @@ namespace ProjectPipe
 
         protected virtual bool RollForOutcomeChance(int outcomeChance)
         {
-            bool outcomeWillBePerformed = false;
-            int randomPercentage = Random.Range(0, 100);
+            var outcomeWillBePerformed = false;
+            var randomPercentage = Random.Range(0, 100);
             if (randomPercentage <= outcomeChance)
-            {
                 outcomeWillBePerformed = true;
-            }
-
+            
             return outcomeWillBePerformed;
         }
 

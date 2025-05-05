@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.AI;
 
 namespace ProjectPipe
@@ -12,16 +10,18 @@ namespace ProjectPipe
         {
             if (aiCharacterManager.IsPerformingAction)
                 return this;
+            
             if (aiCharacterManager.AICharacterCombatManager.CurrentTarget == null)
                 return SwitchState(aiCharacterManager, aiCharacterManager.IdleState);
             
             if (!aiCharacterManager.NavMeshAgent.enabled)
                 aiCharacterManager.NavMeshAgent.enabled = true;
 
+            // This is optional
             if (aiCharacterManager.AICharacterCombatManager.ViewableAngle <
-                aiCharacterManager.AICharacterCombatManager.FOV
+                aiCharacterManager.AICharacterCombatManager.fov
                 || aiCharacterManager.AICharacterCombatManager.ViewableAngle >
-                aiCharacterManager.AICharacterCombatManager.FOV)
+                aiCharacterManager.AICharacterCombatManager.fov)
             {
                 aiCharacterManager.AICharacterCombatManager.PivotTowardsTarget(aiCharacterManager);
             }
@@ -35,7 +35,7 @@ namespace ProjectPipe
             }
             
             
-            NavMeshPath path = new NavMeshPath();
+            var path = new NavMeshPath();
             aiCharacterManager.NavMeshAgent.CalculatePath(aiCharacterManager.AICharacterCombatManager.CurrentTarget.transform.position, path);
             aiCharacterManager.NavMeshAgent.SetPath(path);
             return this;

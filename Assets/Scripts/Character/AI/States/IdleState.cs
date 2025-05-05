@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.Collections;
 
 namespace ProjectPipe
 {
@@ -17,6 +15,5 @@ namespace ProjectPipe
             aiCharacterManager.AICharacterCombatManager.FindTargetViaLineOfSight(aiCharacterManager);
             return this;
         }
-        
     }
 }

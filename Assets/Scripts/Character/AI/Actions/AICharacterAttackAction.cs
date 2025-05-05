@@ -15,11 +15,11 @@ namespace ProjectPipe
         [field: SerializeField] private AttackType attackType;
         public int attackWeight = 50;
         public float actionRecoveryTime = 1.5f;
-        public float FOA = 35;
+        public float foa = 35;
         public float minimumAttackDistance = 0;
         public float maximumAttackDistance = 2;
 
-        public void AttempToPerformAction(AICharacterManager aiCharacterManager)
+        public void AttemptToPerformAction(AICharacterManager aiCharacterManager)
         {
             aiCharacterManager.CharacterAnimatorManager.PlayTargetAttackActionAnimation(attackType, attackAnimation, true);
         }

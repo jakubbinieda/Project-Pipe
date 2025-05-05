@@ -4,7 +4,7 @@ namespace ProjectPipe
     {
         public void RotateTowardsAgent(AICharacterManager aiCharacterManager)
         {
-            if (aiCharacterManager.IsMoving)
+            if (aiCharacterManager.isMoving)
             {
                 aiCharacterManager.transform.rotation = aiCharacterManager.NavMeshAgent.transform.rotation;
             }
