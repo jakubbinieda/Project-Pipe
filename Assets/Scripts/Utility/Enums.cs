@@ -21,4 +21,11 @@ namespace ProjectPipe
         ChargedAttack01,
         ChargedAttack02
     }
+
+    public enum GameSlot
+    {
+        GameSlot_01,
+        GameSlot_02,
+        GameSlot_03
+    }
 }
