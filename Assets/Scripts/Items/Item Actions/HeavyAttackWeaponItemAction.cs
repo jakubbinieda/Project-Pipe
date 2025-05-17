@@ -15,12 +15,12 @@ namespace ProjectPipe
                                                                      weapon.HeavyAttackStaminaMultiplier))
                 return;
 
-            if (attacker.CharacterCombatManager.CanPerformCombo && attacker.IsPerformingAction)
+            if (attacker.CharacterCombatManager.CanDoCombo && attacker.IsPerformingAction)
             {
                 attacker.CharacterStatsManager.SpendStamina(
                     weapon.BaseStaminaCost * weapon.HeavyAttackStaminaMultiplier);
 
-                attacker.CharacterCombatManager.DisableCombo();
+                attacker.CharacterCombatManager.DisableCanDoCombo();
 
                 switch (attacker.CharacterCombatManager.LastAttackAnimation)
                 {
