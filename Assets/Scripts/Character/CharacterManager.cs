@@ -54,8 +54,8 @@ namespace ProjectPipe
             allColliders.Add(characterControllerCollider);
 
             for (var i = 0; i < allColliders.Count; i++)
-            for (var j = i + 1; j < allColliders.Count; j++)
-                Physics.IgnoreCollision(allColliders[i], allColliders[j], true);
+                for (var j = i + 1; j < allColliders.Count; j++)
+                    Physics.IgnoreCollision(allColliders[i], allColliders[j], true);
         }
 
         public IEnumerator ProcessDeathEvent()
@@ -65,6 +65,14 @@ namespace ProjectPipe
             CharacterAnimatorManager.PlayTargetAnimation("Death_01", true, true);
 
             yield return new WaitForSeconds(5f);
+        }
+
+        protected virtual void Update()
+        {
+        }
+
+        protected virtual void FixedUpdate()
+        {
         }
     }
 }

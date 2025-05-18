@@ -83,12 +83,12 @@ namespace ProjectPipe
             (_sheathedWeaponModel, _equippedWeaponModel) = (_equippedWeaponModel, _sheathedWeaponModel);
         }
 
-        public void OpenDamageCollider()
+        public override void OpenDamageCollider()
         {
             _equippedWeaponModel.GetComponent<WeaponManager>().EnableDamageCollider();
         }
 
-        public void CloseDamageCollider()
+        public override void CloseDamageCollider()
         {
             _equippedWeaponModel.GetComponent<WeaponManager>().DisableDamageCollider();
         }

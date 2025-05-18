@@ -8,7 +8,7 @@ namespace ProjectPipe
         [field: SerializeField] public CharacterManager CurrentTarget { get; set; }
 
         private readonly int _isChargingAttackHash = Animator.StringToHash("IsChargingAttack");
-        private CharacterManager _characterManager;
+        protected CharacterManager _characterManager;
 
         public bool CanPerformCombo { get; private set; }
         public string LastAttackAnimation { get; set; }
