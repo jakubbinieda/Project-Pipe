@@ -149,8 +149,8 @@ namespace ProjectPipe
             if (CurrentTarget == null) return;
 
             if (!aiCharacterManager.CanRotate) return;
-
-            if (!aiCharacterManager.IsPerformingAction) return;
+            
+            // if (!aiCharacterManager.IsPerformingAction) return;
             
             Vector3 targetDirection = CurrentTarget.transform.position - aiCharacterManager.transform.position;
             targetDirection.y = 0;

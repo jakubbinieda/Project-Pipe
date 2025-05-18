@@ -27,6 +27,8 @@ namespace ProjectPipe
                 return SwitchState(aiCharacterManager, aiCharacterManager.IdleState);
             }
             
+            aiCharacterManager.AICharacterCombatManager.RotateTowardsTargetWhileAttacking(aiCharacterManager);
+            
             aiCharacterManager.CharacterAnimatorManager.UpdateAnimatorLocomotionValues(0, 0);
             
             if (willPerformCombo && !hasPerformedCombo)
@@ -39,13 +41,13 @@ namespace ProjectPipe
                     // currentAttack.comboAction.AttempToPerformAction(aiCharacterManager);
                 }
             }
+            
+            if (aiCharacterManager.IsPerformingAction)
+                return this;
 
             if (!hasPerformedAttack)
             {
                 if (aiCharacterManager.AICharacterCombatManager.actionRecoveryTime > 0)
-                    return this;
-                
-                if (aiCharacterManager.IsPerformingAction)
                     return this;
                 
                 PerformAttack(aiCharacterManager);

@@ -10,7 +10,7 @@ namespace ProjectPipe
         [field: SerializeField] private AIHandDamageCollider LeftHandDamageCollider { get; set; }
 
         [Header("Damage")]
-        public float BaseDamage { get; set; } = 25;
+        public float BaseDamage { get; set; } = 7;
         public float Attack01DamageMultiplier { get; set; } = 1.0f;
         public float Attack02DamageMultiplier { get; set; } = 2.0f;
 
