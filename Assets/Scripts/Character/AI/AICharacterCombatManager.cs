@@ -75,7 +75,6 @@ namespace ProjectPipe
                             Debug.DrawLine(aiCharacterManager.transform.position,
                                 targetCharacter.transform.position,
                                 Color.red, 0.5f);
-                            Debug.Log("BLOCKED");
                         }
                     }
                     else
@@ -85,7 +84,6 @@ namespace ProjectPipe
                             Debug.DrawLine(aiCharacterManager.transform.position,
                                 targetCharacter.transform.position,
                                 Color.green, 20f);
-                            Debug.Log("FOUND TARGET");
                         }
                         
                         CurrentTarget = targetCharacter;
@@ -102,7 +100,6 @@ namespace ProjectPipe
                         Debug.DrawLine(aiCharacterManager.transform.position,
                             targetCharacter.transform.position,
                             Color.yellow, 0.5f);
-                        Debug.Log("OUT OF SIGHT");
                     }
                 }
             }

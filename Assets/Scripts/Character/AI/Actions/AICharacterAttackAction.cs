@@ -22,6 +22,7 @@ namespace ProjectPipe
         public void AttemptToPerformAction(AICharacterManager aiCharacterManager)
         {
             aiCharacterManager.CharacterAnimatorManager.PlayTargetAttackActionAnimation(attackType, attackAnimation, true);
+            aiCharacterManager.IsPerformingAction = false;
         }
     }
 }

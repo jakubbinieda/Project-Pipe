@@ -82,19 +82,17 @@ namespace ProjectPipe
             {
                 var agentDestination = NavMeshAgent.destination;
                 var agentRemainingDistance = Vector3.Distance(agentDestination, transform.position);
+                
 
-                Debug.Log("DISTANCE TO TARGET: " + agentRemainingDistance);
 
                 if (agentRemainingDistance > NavMeshAgent.stoppingDistance)
                 {
-                    Debug.Log("I AM COMING FOR YOU");
                     isMoving = true;
                     ApplyRootMotion = true; // This should keep the agent stick to root
                     Animator.SetBool(_isMovingHash, true);
                 }
                 else
                 {
-                    Debug.Log("I GOT YOU");
                     isMoving = false;
                     Animator.SetBool(_isMovingHash, false);
                 }

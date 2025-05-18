@@ -43,9 +43,12 @@ namespace ProjectPipe
             
             aiCharacterManager.AICharacterCombatManager.RotateTowardsAgent(aiCharacterManager);
 
+
             if (aiCharacterManager.AICharacterCombatManager.CurrentTarget == null)
+            {
                 return SwitchState(aiCharacterManager, aiCharacterManager.IdleState);
-            
+            }
+
 
             if (!hasAttack)
             {
@@ -56,12 +59,11 @@ namespace ProjectPipe
                 aiCharacterManager.AttackState.currentAttack = _chosenAttack;
                 return SwitchState(aiCharacterManager, aiCharacterManager.AttackState);
             }
-                
+            
             if (aiCharacterManager.AICharacterCombatManager.DistanceFromTarget > maximumEngagementDistance)
             {
                 return SwitchState(aiCharacterManager, aiCharacterManager.PursueTargetState);
             }
-            
             var path = new NavMeshPath();
             aiCharacterManager.NavMeshAgent.CalculatePath(aiCharacterManager.AICharacterCombatManager.CurrentTarget.transform.position, path);
             aiCharacterManager.NavMeshAgent.SetPath(path);
