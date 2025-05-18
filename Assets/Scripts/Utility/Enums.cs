@@ -19,7 +19,10 @@ namespace ProjectPipe
         HeavyAttack01,
         HeavyAttack02,
         ChargedAttack01,
-        ChargedAttack02
+        ChargedAttack02,
+        RunAttack01,
+        RollAttack01,
+        BackstepAttack01
     }
 
     public enum GameSlot

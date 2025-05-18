@@ -27,6 +27,7 @@ namespace ProjectPipe
         {
             base.Start();
 
+            PlayerInputManager.Instance.PlayerManager = this;
             PlayerCamera.Instance.PlayerManager = this;
             WorldSaveGameManager.Instance.player = this;
 

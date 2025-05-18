@@ -89,5 +89,15 @@ namespace ProjectPipe
         {
             _characterManager.CanRotate = false;
         }
+        
+        private void EnableCanRotate()
+        {
+            _characterManager.CanRotate = true;
+        }
+
+        private void DisableCanRotate()
+        {
+            _characterManager.CanRotate = false;
+        }
     }
 }
