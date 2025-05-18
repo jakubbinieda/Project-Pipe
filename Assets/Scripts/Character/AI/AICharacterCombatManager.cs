@@ -23,6 +23,12 @@ namespace ProjectPipe
         [field: SerializeField] private bool drawVisionCone = true;
         [field: SerializeField] private bool drawSightRays = true;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            LockOnTransform = GetComponentInChildren<AILockOnTransform>().transform;
+        }
+
         protected override void Update()
         {
             base.Update();
