@@ -1,22 +1,37 @@
 using UnityEngine;
 
-public class WorldUtilityManager : MonoBehaviour
+namespace ProjectPipe
 {
-    public static WorldUtilityManager Instance;
-
-    [Header("Layers")]
-    [field: SerializeField] public LayerMask CharacterLayers { get; private set; }
-    [field: SerializeField] public LayerMask EnvironmentLayers { get; private set; }
-
-    private void Awake()
+    public class WorldUtilityManager : MonoBehaviour
     {
-        if (Instance)
+        public static WorldUtilityManager Instance { get; private set; }
+
+        [field: Header("Layers")]
+        [field: SerializeField] public LayerMask CharacterLayers;
+        [field: SerializeField] public LayerMask EnvironmentLayers;
+
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            if (Instance)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
 
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        public float GetAngleOfTarget(Transform characterTransform, Vector3 targetsDirection)
+        {
+            targetsDirection.y = 0;
+            var viewableAnge = Vector3.Angle(characterTransform.forward, targetsDirection);
+            var cross = Vector3.Cross(characterTransform.forward, targetsDirection);
+            if (cross.y < 0)
+            {
+                viewableAnge = -viewableAnge;
+            }
+            return viewableAnge;
+        }
     }
 }

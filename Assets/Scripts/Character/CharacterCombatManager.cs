@@ -13,7 +13,7 @@ namespace ProjectPipe
         [field: SerializeField] public bool CanDoCombo { get; private set; }
 
         private readonly int _isChargingAttackHash = Animator.StringToHash("IsChargingAttack");
-        private CharacterManager _characterManager;
+        protected CharacterManager _characterManager;
 
         public string LastAttackAnimation { get; set; }
 

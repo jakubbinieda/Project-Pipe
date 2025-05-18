@@ -80,6 +80,16 @@ namespace ProjectPipe
                 groundCheckSphereRadius, groundLayer);
         }
 
+        public void EnableRotate()
+        {
+            _characterManager.CanRotate = true;
+        }
+        
+        public void DisableRotate()
+        {
+            _characterManager.CanRotate = false;
+        }
+        
         private void EnableCanRotate()
         {
             _characterManager.CanRotate = true;

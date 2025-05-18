@@ -10,9 +10,11 @@ namespace ProjectPipe
         [field: SerializeField] private string hitLeftMedium01 = "Hit_Left_Medium_01";
         [field: SerializeField] private string hitRightMedium01 = "Hit_Right_Medium_01";
 
-        private CharacterManager _characterManager;
-        private int _horizontalHash;
-        private int _verticalHash;
+        protected CharacterManager _characterManager;
+        protected int _horizontalHash;
+        protected int _verticalHash;
+
+        protected int _isMovingHash;
 
         protected virtual void Awake()
         {
@@ -20,9 +22,10 @@ namespace ProjectPipe
 
             _horizontalHash = Animator.StringToHash("Horizontal");
             _verticalHash = Animator.StringToHash("Vertical");
+            _isMovingHash = Animator.StringToHash("isMoving");
         }
 
-        public void UpdateAnimatorLocomotionValues(float horizontalValue, float verticalValue)
+        public virtual void UpdateAnimatorLocomotionValues(float horizontalValue, float verticalValue)
         {
             _characterManager.Animator.SetFloat(_horizontalHash, horizontalValue, 0.1f, Time.deltaTime);
             _characterManager.Animator.SetFloat(_verticalHash, verticalValue, 0.1f, Time.deltaTime);

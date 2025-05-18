@@ -68,7 +68,7 @@ namespace ProjectPipe
             moveDirection.y = 0;
 
             _moveAmount = ClampInput(PlayerInputManager.Instance.MovementInput.magnitude);
-
+            
             if (_playerManager.IsSprinting)
             {
                 _playerManager.CharacterController.Move(sprintSpeed * Time.deltaTime * moveDirection);
@@ -87,9 +87,11 @@ namespace ProjectPipe
             if (!PlayerCamera.Instance.IsLockedOn || _playerManager.IsSprinting)
                 _playerManager.PlayerAnimatorManager.UpdateAnimatorLocomotionValues(0, _moveAmount);
             else
+            {
                 _playerManager.PlayerAnimatorManager.UpdateAnimatorLocomotionValues(
                     ClampInput(PlayerInputManager.Instance.MovementInput.x),
                     ClampInput(PlayerInputManager.Instance.MovementInput.y));
+            }
         }
 
         private void HandleJumpingMovement()

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace ProjectPipe
 {
     public class PlayerManager : CharacterManager
@@ -27,10 +29,38 @@ namespace ProjectPipe
 
             PlayerInputManager.Instance.PlayerManager = this;
             PlayerCamera.Instance.PlayerManager = this;
+            WorldSaveGameManager.Instance.player = this;
 
             // TODO: Think of something better
             PlayerStatsManager.SetMaxStamina(100);
             PlayerStatsManager.SetMaxHealth(100);
+        }
+
+        public void SaveGame(ref GameSaveData gameSaveData)
+        {
+            gameSaveData.xPosition = transform.position.x;
+            gameSaveData.yPosition = transform.position.y;
+            gameSaveData.zPosition = transform.position.z;
+        }
+
+        public void LoadGame(ref GameSaveData gameSaveData)
+        {
+            Vector3 myPosition = new Vector3(
+                gameSaveData.xPosition, 
+                gameSaveData.yPosition, 
+                gameSaveData.zPosition
+            );
+            
+            if (TryGetComponent<CharacterController>(out var controller))
+            {
+                controller.enabled = false;
+                transform.position = myPosition;
+                controller.enabled = true;
+            }
+            else
+            {
+                transform.position = myPosition;
+            }
         }
     }
 }
