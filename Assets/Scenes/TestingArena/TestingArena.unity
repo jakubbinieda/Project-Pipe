@@ -1674,6 +1674,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1365942602687503261, guid: 7e9ab4e1987954f0589f4eb545e2f7cd, type: 3}
+      propertyPath: AILayers.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365942602687503261, guid: 7e9ab4e1987954f0589f4eb545e2f7cd, type: 3}
       propertyPath: CharacterLayers.m_Bits
       value: 64
       objectReference: {fileID: 0}
