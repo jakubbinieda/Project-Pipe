@@ -44,9 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183e4e99f8c924ef38a04e77769b40b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CharacterLayers>k__BackingField:
+  CharacterLayers:
     serializedVersion: 2
-    m_Bits: 1048768
-  <EnvironmentLayers>k__BackingField:
+    m_Bits: 64
+  EnvironmentLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 256
+  AILayers:
+    serializedVersion: 2
+    m_Bits: 1024
