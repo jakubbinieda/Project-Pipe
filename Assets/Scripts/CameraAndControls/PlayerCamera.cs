@@ -61,10 +61,6 @@ namespace ProjectPipe
         private void Start()
         {
             _cameraZPosition = CameraObject.transform.localPosition.z;
-
-            // TODO: Move somewhere else
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void LateUpdate()
@@ -113,8 +109,10 @@ namespace ProjectPipe
 
         private void HandleUnlockedRotation()
         {
-            horizontalLookAngle += PlayerInputManager.Instance.CameraInput.x * horizontalRotationSpeed * Time.deltaTime;
-            verticalLookAngle -= PlayerInputManager.Instance.CameraInput.y * verticalRotationSpeed * Time.deltaTime;
+            float sensitivity = WorldSettingsManager.Instance.MouseSensitivity;
+
+            horizontalLookAngle += PlayerInputManager.Instance.CameraInput.x * horizontalRotationSpeed * sensitivity * Time.deltaTime;
+            verticalLookAngle -= PlayerInputManager.Instance.CameraInput.y * verticalRotationSpeed * sensitivity * Time.deltaTime;
             verticalLookAngle = Mathf.Clamp(verticalLookAngle, minimumPivotAngle, maximumPivotAngle);
 
             var cameraRotation = Vector3.zero;

@@ -132,12 +132,18 @@ namespace ProjectPipe
 
         public IEnumerator LoadWorldScene()
         {
-            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
+            PlayerInputManager.Instance.EnterGameplayMode();
 
+            AsyncOperation loadOperation = SceneManager.LoadSceneAsync(worldSceneIndex);
             yield return new WaitUntil(() => loadOperation.isDone);
 
-            player = FindObjectOfType<PlayerManager>();
+            player = FindFirstObjectByType<PlayerManager>();
             player.LoadGame(ref currentGameData);
+        }   
+
+        public void BackToMainMenu()
+        {
+            SceneManager.LoadScene("Scene_Main_Menu");
         }
 
         public int GetWorldSceneIndex()

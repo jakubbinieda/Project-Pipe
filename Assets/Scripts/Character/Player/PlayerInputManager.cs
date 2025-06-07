@@ -26,6 +26,9 @@ namespace ProjectPipe
         [field: SerializeField] public bool ToggleWeaponInput { get; set; }
         [SerializeField] private bool attackToggleComposite;
 
+        [Header("UI")]
+        [field: SerializeField] public bool PauseInput { get; private set; }
+
         private PlayerControls _playerControls;
 
         private void Awake()
@@ -73,9 +76,59 @@ namespace ProjectPipe
                 _playerControls.PlayerActions.ChargedAttack.performed += ctx => ChargedAttackInput = true;
                 _playerControls.PlayerActions.ChargedAttack.canceled += ctx => ChargedAttackInput = false;
                 _playerControls.PlayerActions.ToggleWeapon.performed += ctx => ToggleWeaponInput = true;
+
+                _playerControls.UI.Pause.performed += ctx => PauseInput = true;
+                _playerControls.UI.Pause.canceled += ctx => PauseInput = false;
             }
 
             _playerControls.Enable();
+        }
+
+        public void EnterGameplayMode()
+        {
+            ResetAllInputs();
+            _playerControls.Enable();
+            DisableCursor();
+        }
+
+        public void ExitGameplayMode()
+        {
+            ResetAllInputs();
+            _playerControls.Disable();
+            EnableCursor();
+        }
+
+        private void ResetAllInputs()
+        {
+            CameraInput = Vector2.zero;
+            LockOnInput = false;
+            ChangeLockOnToLeft = false;
+            ChangeLockOnToRight = false;
+
+            MovementInput = Vector2.zero;
+            DodgeInput = false;
+            JumpInput = false;
+            SprintInput = false;
+
+            LightAttackInput = false;
+            HeavyAttackInput = false;
+            ChargedAttackInput = false;
+            ToggleWeaponInput = false;
+            attackToggleComposite = false;
+
+            PauseInput = false;
+        }
+
+        private void EnableCursor()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        
+        private void DisableCursor()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 }

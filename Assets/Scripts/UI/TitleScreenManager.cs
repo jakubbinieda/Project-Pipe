@@ -8,10 +8,13 @@ namespace ProjectPipe
         [Header("Menus")]
         [SerializeField] GameObject titleScreenMainMenu;
         [SerializeField] GameObject titleScreenLoadMenu;
+        [SerializeField] GameObject titleScreenSettingsMenu;
 
         [Header("Buttons")]
         [SerializeField] Button loadMenuReturnButton;
         [SerializeField] Button mainMenuLoadGameButton;
+        [SerializeField] Button settingsMenuReturnButton;
+        [SerializeField] Button mainMenuSettingsButton;
 
         public void StartNewGame()
         {
@@ -31,6 +34,20 @@ namespace ProjectPipe
             titleScreenLoadMenu.SetActive(false);
             titleScreenMainMenu.SetActive(true);
             mainMenuLoadGameButton.Select();
+        }
+        
+        public void OpenSettingsMenu()
+        {
+            titleScreenMainMenu.SetActive(false);
+            titleScreenSettingsMenu.SetActive(true);
+            settingsMenuReturnButton.Select();
+        }
+        
+        public void CloseSettingsMenu()
+        {
+            titleScreenSettingsMenu.SetActive(false);
+            titleScreenMainMenu.SetActive(true);
+            mainMenuSettingsButton.Select();
         }
 
         public void ExitGame()
