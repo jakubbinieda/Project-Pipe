@@ -33,6 +33,9 @@ namespace ProjectPipe
         [SerializeField] private bool queLightAttackInput;
         [SerializeField] private bool queHeavyAttackInput;
 
+        [Header("UI")]
+        [field: SerializeField] public bool PauseInput { get; private set; }
+
         private PlayerControls _playerControls;
 
         public PlayerManager PlayerManager { get; set; }
@@ -98,11 +101,61 @@ namespace ProjectPipe
                     if (ctx.action.activeControl.device is Gamepad || attackToggleComposite)
                         EnqueueInput(ref queHeavyAttackInput);
                 };
+                
+                _playerControls.UI.Pause.performed += ctx => PauseInput = true;
+                _playerControls.UI.Pause.canceled += ctx => PauseInput = false;
             }
 
             _playerControls.Enable();
         }
 
+        public void EnterGameplayMode()
+        {
+            ResetAllInputs();
+            _playerControls.Enable();
+            DisableCursor();
+        }
+
+        public void ExitGameplayMode()
+        {
+            ResetAllInputs();
+            _playerControls.Disable();
+            EnableCursor();
+        }
+
+        private void ResetAllInputs()
+        {
+            CameraInput = Vector2.zero;
+            LockOnInput = false;
+            ChangeLockOnToLeft = false;
+            ChangeLockOnToRight = false;
+
+            MovementInput = Vector2.zero;
+            DodgeInput = false;
+            JumpInput = false;
+            SprintInput = false;
+
+            LightAttackInput = false;
+            HeavyAttackInput = false;
+            ChargedAttackInput = false;
+            ToggleWeaponInput = false;
+            attackToggleComposite = false;
+
+            PauseInput = false;
+        }
+
+        private void EnableCursor()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        
+        private void DisableCursor()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        
         private void EnqueueInput(ref bool queInput)
         {
             // TODO: Check for open UI

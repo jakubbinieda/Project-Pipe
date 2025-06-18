@@ -28,7 +28,7 @@ namespace ProjectPipe
 
         protected virtual void Awake()
         {
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
 
             Animator = GetComponent<Animator>();
             CharacterAnimatorManager = GetComponent<CharacterAnimatorManager>();
