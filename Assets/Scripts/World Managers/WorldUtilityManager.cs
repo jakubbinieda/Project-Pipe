@@ -9,6 +9,7 @@ namespace ProjectPipe
         [field: Header("Layers")]
         [field: SerializeField] public LayerMask CharacterLayers;
         [field: SerializeField] public LayerMask EnvironmentLayers;
+        [field: SerializeField] public LayerMask AILayers;
 
         private void Awake()
         {
