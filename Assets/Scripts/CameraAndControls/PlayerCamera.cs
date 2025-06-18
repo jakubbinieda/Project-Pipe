@@ -177,7 +177,7 @@ namespace ProjectPipe
             var closestDistanceToLeftTarget = -Mathf.Infinity;
 
             var colliders = Physics.OverlapSphere(PlayerManager.transform.position, lockOnRadius,
-                WorldUtilityManager.Instance.CharacterLayers);
+                WorldUtilityManager.Instance.AILayers);
 
             foreach (var targetsCollider in colliders)
             {

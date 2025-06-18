@@ -79,5 +79,25 @@ namespace ProjectPipe
             _characterManager.IsGrounded = Physics.CheckSphere(_characterManager.transform.position,
                 groundCheckSphereRadius, groundLayer);
         }
+
+        public void EnableRotate()
+        {
+            _characterManager.CanRotate = true;
+        }
+        
+        public void DisableRotate()
+        {
+            _characterManager.CanRotate = false;
+        }
+        
+        private void EnableCanRotate()
+        {
+            _characterManager.CanRotate = true;
+        }
+
+        private void DisableCanRotate()
+        {
+            _characterManager.CanRotate = false;
+        }
     }
 }

@@ -106,7 +106,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""646e9d09-07e1-4c5f-a88b-1833136f7670"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": ""Tap(duration=0.4,pressPoint=0.1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -115,7 +115,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""49f8fec9-f741-4f7f-8fc0-41eb4c183146"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold(duration=0.4,pressPoint=0.1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -497,9 +497,27 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""QueLightAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""1010aab7-718e-4c9e-9eff-a0aef2a64aa8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""HeavyAttack"",
                     ""type"": ""Button"",
                     ""id"": ""7ad2330c-bf7b-49f7-8808-c67c04881c1e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""QueHeavyAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c5e3f9c-de94-4ac0-9dd6-c9ede415d25c"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -558,6 +576,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""b1e32c0f-55b9-48ee-b047-a33e93d0a063"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""QueLightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""78f0025f-295c-4c41-8eef-8ea8f70a25eb"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""QueLightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2e1168bd-2874-46ff-954c-7942c41678fc"",
                     ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
@@ -575,6 +615,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard and Mouse"",
                     ""action"": ""HeavyAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff5471e8-47aa-4bea-87fd-5e4a2fe16c15"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""QueHeavyAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""65f7604f-fa3b-4eac-b51a-b3757314a46e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Tap(duration=0.4,pressPoint=0.1)"",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""QueHeavyAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -720,7 +782,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Player Actions
         m_PlayerActions = asset.FindActionMap("Player Actions", throwIfNotFound: true);
         m_PlayerActions_LightAttack = m_PlayerActions.FindAction("LightAttack", throwIfNotFound: true);
+        m_PlayerActions_QueLightAttack = m_PlayerActions.FindAction("QueLightAttack", throwIfNotFound: true);
         m_PlayerActions_HeavyAttack = m_PlayerActions.FindAction("HeavyAttack", throwIfNotFound: true);
+        m_PlayerActions_QueHeavyAttack = m_PlayerActions.FindAction("QueHeavyAttack", throwIfNotFound: true);
         m_PlayerActions_ChargedAttack = m_PlayerActions.FindAction("ChargedAttack", throwIfNotFound: true);
         m_PlayerActions_AttackTypeToggle = m_PlayerActions.FindAction("AttackTypeToggle", throwIfNotFound: true);
         m_PlayerActions_ToggleWeapon = m_PlayerActions.FindAction("ToggleWeapon", throwIfNotFound: true);
@@ -1069,7 +1133,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerActions;
     private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
     private readonly InputAction m_PlayerActions_LightAttack;
+    private readonly InputAction m_PlayerActions_QueLightAttack;
     private readonly InputAction m_PlayerActions_HeavyAttack;
+    private readonly InputAction m_PlayerActions_QueHeavyAttack;
     private readonly InputAction m_PlayerActions_ChargedAttack;
     private readonly InputAction m_PlayerActions_AttackTypeToggle;
     private readonly InputAction m_PlayerActions_ToggleWeapon;
@@ -1089,9 +1155,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @LightAttack => m_Wrapper.m_PlayerActions_LightAttack;
         /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/QueLightAttack".
+        /// </summary>
+        public InputAction @QueLightAttack => m_Wrapper.m_PlayerActions_QueLightAttack;
+        /// <summary>
         /// Provides access to the underlying input action "PlayerActions/HeavyAttack".
         /// </summary>
         public InputAction @HeavyAttack => m_Wrapper.m_PlayerActions_HeavyAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/QueHeavyAttack".
+        /// </summary>
+        public InputAction @QueHeavyAttack => m_Wrapper.m_PlayerActions_QueHeavyAttack;
         /// <summary>
         /// Provides access to the underlying input action "PlayerActions/ChargedAttack".
         /// </summary>
@@ -1133,9 +1207,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LightAttack.started += instance.OnLightAttack;
             @LightAttack.performed += instance.OnLightAttack;
             @LightAttack.canceled += instance.OnLightAttack;
+            @QueLightAttack.started += instance.OnQueLightAttack;
+            @QueLightAttack.performed += instance.OnQueLightAttack;
+            @QueLightAttack.canceled += instance.OnQueLightAttack;
             @HeavyAttack.started += instance.OnHeavyAttack;
             @HeavyAttack.performed += instance.OnHeavyAttack;
             @HeavyAttack.canceled += instance.OnHeavyAttack;
+            @QueHeavyAttack.started += instance.OnQueHeavyAttack;
+            @QueHeavyAttack.performed += instance.OnQueHeavyAttack;
+            @QueHeavyAttack.canceled += instance.OnQueHeavyAttack;
             @ChargedAttack.started += instance.OnChargedAttack;
             @ChargedAttack.performed += instance.OnChargedAttack;
             @ChargedAttack.canceled += instance.OnChargedAttack;
@@ -1159,9 +1239,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @LightAttack.started -= instance.OnLightAttack;
             @LightAttack.performed -= instance.OnLightAttack;
             @LightAttack.canceled -= instance.OnLightAttack;
+            @QueLightAttack.started -= instance.OnQueLightAttack;
+            @QueLightAttack.performed -= instance.OnQueLightAttack;
+            @QueLightAttack.canceled -= instance.OnQueLightAttack;
             @HeavyAttack.started -= instance.OnHeavyAttack;
             @HeavyAttack.performed -= instance.OnHeavyAttack;
             @HeavyAttack.canceled -= instance.OnHeavyAttack;
+            @QueHeavyAttack.started -= instance.OnQueHeavyAttack;
+            @QueHeavyAttack.performed -= instance.OnQueHeavyAttack;
+            @QueHeavyAttack.canceled -= instance.OnQueHeavyAttack;
             @ChargedAttack.started -= instance.OnChargedAttack;
             @ChargedAttack.performed -= instance.OnChargedAttack;
             @ChargedAttack.canceled -= instance.OnChargedAttack;
@@ -1413,12 +1499,26 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLightAttack(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "QueLightAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnQueLightAttack(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "HeavyAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnHeavyAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "QueHeavyAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnQueHeavyAttack(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "ChargedAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

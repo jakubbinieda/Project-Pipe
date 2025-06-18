@@ -13,6 +13,8 @@ namespace ProjectPipe
 
             maxHealth.OnValueChanged += hud.SetMaxHealthValue;
             currentHealth.OnValueChanged += hud.SetNewHealthValue;
+            
+            currentHealth.OnValueChanged += CheckHP;
         }
     }
 }

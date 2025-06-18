@@ -7,10 +7,14 @@ namespace ProjectPipe
         [field: SerializeField] public Transform LockOnTransform { get; set; }
         [field: SerializeField] public CharacterManager CurrentTarget { get; set; }
 
-        private readonly int _isChargingAttackHash = Animator.StringToHash("IsChargingAttack");
-        private CharacterManager _characterManager;
+        [Header("Attack Flags")]
+        [field: SerializeField] public bool CanDoRollAttack { get; private set; }
+        [field: SerializeField] public bool CanDoBackstepAttack { get; private set; }
+        [field: SerializeField] public bool CanDoCombo { get; private set; }
 
-        public bool CanPerformCombo { get; private set; }
+        private readonly int _isChargingAttackHash = Animator.StringToHash("IsChargingAttack");
+        protected CharacterManager _characterManager;
+
         public string LastAttackAnimation { get; set; }
 
         public AttackType CurrentAttackType { get; set; }
@@ -27,24 +31,45 @@ namespace ProjectPipe
         {
         }
 
+        public virtual void SetTarget(CharacterManager target)
+        {
+            CurrentTarget = target ? target : null;
+        }
+
         private void OnIsChargingHeavyAttackValueChanged(bool oldValue, bool newValue)
         {
             _characterManager.Animator.SetBool(_isChargingAttackHash, newValue);
         }
 
-        public void EnableCombo()
+        public void EnableCanDoCombo()
         {
-            CanPerformCombo = true;
+            CanDoCombo = true;
         }
 
-        public void DisableCombo()
+        public void DisableCanDoCombo()
         {
-            CanPerformCombo = false;
+            CanDoCombo = false;
         }
 
-        public virtual void SetTarget(CharacterManager target)
+
+        public void EnableCanDoRollAttack()
         {
-            CurrentTarget = target ? target : null;
+            CanDoRollAttack = true;
+        }
+
+        public void DisableCanDoRollAttack()
+        {
+            CanDoRollAttack = false;
+        }
+
+        public void EnableCanDoBackstepAttack()
+        {
+            CanDoBackstepAttack = true;
+        }
+
+        public void DisableCanDoBackstepAttack()
+        {
+            CanDoBackstepAttack = false;
         }
     }
 }

@@ -74,10 +74,10 @@ namespace ProjectPipe
             _staminaRegenerationTimer = 0;
         }
 
-        private void CheckHP(int oldValue, int newValue)
+        protected void CheckHP(int oldValue, int newValue)
         {
             if (newValue > 0) return;
-
+            
             StartCoroutine(_characterManager.ProcessDeathEvent());
         }
 
