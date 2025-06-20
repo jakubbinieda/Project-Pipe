@@ -16,14 +16,21 @@ namespace ProjectPipe
         [SerializeField] Button settingsMenuReturnButton;
         [SerializeField] Button mainMenuSettingsButton;
 
+        public void PlayHover()
+        {
+            UISoundFXManager.Instance.PlayHover();
+        }
+
         public void StartNewGame()
         {
+            UISoundFXManager.Instance.PlayClick();
             WorldSaveGameManager.Instance.CreateNewGame();
             StartCoroutine(WorldSaveGameManager.Instance.LoadWorldScene());
         }
 
         public void OpenLoadGameMenu()
         {
+            UISoundFXManager.Instance.PlayClick();
             titleScreenMainMenu.SetActive(false);
             titleScreenLoadMenu.SetActive(true);
             loadMenuReturnButton.Select();
@@ -31,6 +38,7 @@ namespace ProjectPipe
 
         public void CloseLoadGameMenu()
         {
+            UISoundFXManager.Instance.PlayClick();
             titleScreenLoadMenu.SetActive(false);
             titleScreenMainMenu.SetActive(true);
             mainMenuLoadGameButton.Select();
@@ -38,6 +46,7 @@ namespace ProjectPipe
         
         public void OpenSettingsMenu()
         {
+            UISoundFXManager.Instance.PlayClick();
             titleScreenMainMenu.SetActive(false);
             titleScreenSettingsMenu.SetActive(true);
             settingsMenuReturnButton.Select();
@@ -45,6 +54,7 @@ namespace ProjectPipe
         
         public void CloseSettingsMenu()
         {
+            UISoundFXManager.Instance.PlayClick();
             titleScreenSettingsMenu.SetActive(false);
             titleScreenMainMenu.SetActive(true);
             mainMenuSettingsButton.Select();

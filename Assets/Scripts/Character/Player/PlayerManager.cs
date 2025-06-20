@@ -10,6 +10,7 @@ namespace ProjectPipe
         public PlayerInventoryManager PlayerInventoryManager { get; private set; }
         public PlayerLocomotionManager PlayerLocomotionManager { get; private set; }
         public PlayerStatsManager PlayerStatsManager { get; private set; }
+        public PlayerSoundFXManager PlayerSoundFXManager { get; private set; }
 
         protected override void Awake()
         {
@@ -21,6 +22,7 @@ namespace ProjectPipe
             PlayerInventoryManager = GetComponent<PlayerInventoryManager>();
             PlayerLocomotionManager = GetComponent<PlayerLocomotionManager>();
             PlayerStatsManager = GetComponent<PlayerStatsManager>();
+            PlayerSoundFXManager = GetComponent<PlayerSoundFXManager>();
         }
 
         protected override void Start()

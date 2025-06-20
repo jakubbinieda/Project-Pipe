@@ -451,6 +451,142 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454768333}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &478367303 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6296628081147748892, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+  m_PrefabInstance: {fileID: 671528437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &478367304 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6733738737058033393, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+  m_PrefabInstance: {fileID: 671528437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &478367305 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1150078883452878740, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+  m_PrefabInstance: {fileID: 671528437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &478367306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3746240533798914371, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+  m_PrefabInstance: {fileID: 671528437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &478367307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478367303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 671528438}
+          m_TargetAssemblyTypeName: ProjectPipe.PauseScreenManager, Assembly-CSharp
+          m_MethodName: PlayHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &478367308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478367304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 671528438}
+          m_TargetAssemblyTypeName: ProjectPipe.PauseScreenManager, Assembly-CSharp
+          m_MethodName: PlayHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &478367309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478367305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 671528438}
+          m_TargetAssemblyTypeName: ProjectPipe.PauseScreenManager, Assembly-CSharp
+          m_MethodName: PlayHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &478367310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478367306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 671528438}
+          m_TargetAssemblyTypeName: ProjectPipe.PauseScreenManager, Assembly-CSharp
+          m_MethodName: PlayHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &512765129
 GameObject:
   m_ObjectHideFlags: 0
@@ -603,6 +739,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4050519852461739839, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4050519852461739839, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayHover
+      objectReference: {fileID: 0}
     - target: {fileID: 4915326793809407254, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -614,6 +758,14 @@ PrefabInstance:
     - target: {fileID: 5359703454341408441, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
       propertyPath: m_Name
       value: PF_Player UI Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469546663878604640, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5469546663878604640, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayHover
       objectReference: {fileID: 0}
     - target: {fileID: 5960385911435424675, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
       propertyPath: m_Pivot.x
@@ -714,8 +866,142 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6167297936585293575, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 671528443}
+    - targetCorrespondingSourceObject: {fileID: 4001249352527284685, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 671528444}
+    - targetCorrespondingSourceObject: {fileID: 5720216289865506698, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 671528442}
+    - targetCorrespondingSourceObject: {fileID: 3746240533798914371, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 478367310}
+    - targetCorrespondingSourceObject: {fileID: 1150078883452878740, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 478367309}
+    - targetCorrespondingSourceObject: {fileID: 6733738737058033393, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 478367308}
+    - targetCorrespondingSourceObject: {fileID: 6296628081147748892, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 478367307}
   m_SourcePrefab: {fileID: 100100000, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+--- !u!114 &671528438 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3630205031747093529, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+  m_PrefabInstance: {fileID: 671528437}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba8919428def0f9d6a89c85d26fb1884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &671528439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5720216289865506698, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+  m_PrefabInstance: {fileID: 671528437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &671528440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6167297936585293575, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+  m_PrefabInstance: {fileID: 671528437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &671528441 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4001249352527284685, guid: 919c719d8a916c52080c6af6d7b879b0, type: 3}
+  m_PrefabInstance: {fileID: 671528437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &671528442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671528439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 671528438}
+          m_TargetAssemblyTypeName: ProjectPipe.PauseScreenManager, Assembly-CSharp
+          m_MethodName: PlayHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &671528443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671528440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 671528438}
+          m_TargetAssemblyTypeName: ProjectPipe.PauseScreenManager, Assembly-CSharp
+          m_MethodName: PlayHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &671528444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671528441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 9
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 671528438}
+          m_TargetAssemblyTypeName: ProjectPipe.PauseScreenManager, Assembly-CSharp
+          m_MethodName: PlayHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

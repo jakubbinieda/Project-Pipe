@@ -28,6 +28,7 @@ namespace ProjectPipe
         
         public void OpenRightHandDamageCollider()
         {
+            AICharacterManager.CharacterSoundFXManager.PlayAttackGrunt();
             RightHandDamageCollider.EnableDamageCollider();
         }
         
@@ -38,6 +39,7 @@ namespace ProjectPipe
         
         public void OpenLeftHandDamageCollider()
         {
+            AICharacterManager.CharacterSoundFXManager.PlayAttackGrunt();
             LeftHandDamageCollider.EnableDamageCollider();
         }
         
