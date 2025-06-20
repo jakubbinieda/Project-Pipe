@@ -32,13 +32,21 @@ namespace ProjectPipe
 
         public void Resume()
         {
+            UISoundFXManager.Instance.PlayClick();
             pauseScreenMenu.SetActive(false);
             PlayerInputManager.Instance.EnterGameplayMode();
             Time.timeScale = 1;
         }
 
+        public void SaveGame()
+        {
+            UISoundFXManager.Instance.PlayClick();
+            WorldSaveGameManager.Instance.SaveGame();
+        }
+
         public void OpenSettings()
         {
+            UISoundFXManager.Instance.PlayClick();
             pauseScreenMenu.SetActive(false);
             pauseScreenSettings.SetActive(true);
             closeSettingsButton.Select();
@@ -46,6 +54,7 @@ namespace ProjectPipe
 
         public void CloseSettings()
         {
+            UISoundFXManager.Instance.PlayClick();
             pauseScreenSettings.SetActive(false);
             pauseScreenMenu.SetActive(true);
             settingsButton.Select();
@@ -53,9 +62,15 @@ namespace ProjectPipe
 
         public void BackToMainMenu()
         {
+            UISoundFXManager.Instance.PlayClick();
             pauseScreenMenu.SetActive(false);
             Time.timeScale = 1;
             WorldSaveGameManager.Instance.BackToMainMenu();
+        }
+
+        public void PlayHover()
+        {
+            UISoundFXManager.Instance.PlayHover();
         }
     }
 }

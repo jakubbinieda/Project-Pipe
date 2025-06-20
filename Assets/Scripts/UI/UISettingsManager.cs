@@ -19,16 +19,19 @@ namespace ProjectPipe
 
         public void OnFullscreenChanged(bool value)
         {
+            UISoundFXManager.Instance.PlayClick();
             WorldSettingsManager.Instance.SetFullscreen(value);
         }
 
         public void OnMouseSensitivityChanged(float value)
         {
+            UISoundFXManager.Instance.PlayClick();
             WorldSettingsManager.Instance.SetMouseSensitivity(value);
         }
 
         public void OnMusicVolumeChanged(float value)
         {
+            UISoundFXManager.Instance.PlayClick();
             WorldSettingsManager.Instance.SetMusicVolume(value);
         }
     }

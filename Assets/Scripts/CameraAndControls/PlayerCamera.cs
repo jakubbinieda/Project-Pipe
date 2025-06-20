@@ -55,7 +55,7 @@ namespace ProjectPipe
             }
 
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
 
         private void Start()

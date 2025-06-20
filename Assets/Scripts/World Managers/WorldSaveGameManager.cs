@@ -82,11 +82,16 @@ namespace ProjectPipe
             return fileName;
         }
 
-        public void CreateNewGame()
+        public void CreateNewGame(GameSlot slot)
         {
+            currentGameSlotBeingUsed = slot;
             saveFileName = DecideGameFileNameBasedOnGameSlotBeingUsed(currentGameSlotBeingUsed);
 
             currentGameData = new GameSaveData();
+
+            DeleteSaveGame(slot);
+
+            StartCoroutine(LoadWorldScene(true));
         }
 
         public void LoadGame()
@@ -99,7 +104,7 @@ namespace ProjectPipe
 
             currentGameData = saveFileDataWriter.LoadSaveFile();
 
-            StartCoroutine(LoadWorldScene());
+            StartCoroutine(LoadWorldScene(false));
         }
 
         public void SaveGame()
@@ -110,9 +115,45 @@ namespace ProjectPipe
             saveFileDataWriter.SaveDataDirectoryPath = Application.persistentDataPath;
             saveFileDataWriter.SaveFileName = saveFileName;
 
+            currentGameData.saveTimestamp = System.DateTime.Now.ToString("dd MMM yyyy, HH:mm");
+
             player.SaveGame(ref currentGameData);
 
+            currentGameData.enemies.Clear();
+            var allEnemies = FindObjectsByType<AICharacterManager>(FindObjectsSortMode.None);
+            foreach (var enemy in allEnemies)
+            {
+                enemy.SaveGame(ref currentGameData);
+            }
+
             saveFileDataWriter.CreateNewGameSaveFile(currentGameData);
+        }
+
+        public void DeleteSaveGame(GameSlot slot)
+        {
+            string fileName = DecideGameFileNameBasedOnGameSlotBeingUsed(slot);
+
+            saveFileDataWriter = new SaveFileDataWriter();
+            saveFileDataWriter.SaveDataDirectoryPath = Application.persistentDataPath;
+            saveFileDataWriter.SaveFileName = fileName;
+
+            if (saveFileDataWriter.CheckToSeeIfFileExists())
+            {
+                saveFileDataWriter.DeleteSaveFile();
+
+                switch (slot)
+                {
+                    case GameSlot.GameSlot_01:
+                        gameSlot01 = null;
+                        break;
+                    case GameSlot.GameSlot_02:
+                        gameSlot02 = null;
+                        break;
+                    case GameSlot.GameSlot_03:
+                        gameSlot03 = null;
+                        break;
+                }
+            }
         }
 
         private void LoadAllGameSaves()
@@ -130,7 +171,7 @@ namespace ProjectPipe
             gameSlot03 = saveFileDataWriter.LoadSaveFile();
         }
 
-        public IEnumerator LoadWorldScene()
+        public IEnumerator LoadWorldScene(bool isNewGame)
         {
             PlayerInputManager.Instance.EnterGameplayMode();
 
@@ -138,7 +179,13 @@ namespace ProjectPipe
             yield return new WaitUntil(() => loadOperation.isDone);
 
             player = FindFirstObjectByType<PlayerManager>();
-            player.LoadGame(ref currentGameData);
+            player.LoadGame(ref currentGameData, isNewGame);
+
+            var allEnemies = Object.FindObjectsByType<AICharacterManager>(FindObjectsSortMode.None);
+            foreach (var enemy in allEnemies)
+            {
+                enemy.LoadGame(currentGameData);
+            }
         }   
 
         public void BackToMainMenu()

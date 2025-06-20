@@ -22,6 +22,7 @@ namespace ProjectPipe
 
             CalculateDamage(characterManager);
             PlayDirectionalDamageAnimation(characterManager);
+            PlayDamageSFX(characterManager);
             PlayDamageVFX(characterManager);
         }
 
@@ -32,6 +33,14 @@ namespace ProjectPipe
             if (TotalDamage <= 0) TotalDamage = 1;
 
             characterManager.CharacterStatsManager.ReduceHealth(TotalDamage);
+        }
+
+        private void PlayDamageSFX(CharacterManager characterManager)
+        {
+            // AudioClip physicalDamangeSFX = WorldSoundFXManager.Instance.ChooseRandomSFXFromArray(WorldSoundFXManager.Instance.physicalDamageSFX);
+
+            // characterManager.CharacterSoundFXManager.PlaySoundFX(physicalDamangeSFX);
+            characterManager.CharacterSoundFXManager.PlayDamageGrunt();
         }
 
         private void PlayDamageVFX(CharacterManager characterManager)

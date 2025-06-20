@@ -11,7 +11,7 @@ namespace ProjectPipe
         public GameSlot gameSlot;
 
         [Header("Game Info")]
-        public TextMeshProUGUI timePlayed;
+        public TextMeshProUGUI saveDateTime;
 
         private void OnEnable()
         {
@@ -23,21 +23,35 @@ namespace ProjectPipe
             _saveFileDataWriter = new SaveFileDataWriter();
             _saveFileDataWriter.SaveDataDirectoryPath = Application.persistentDataPath;
             _saveFileDataWriter.SaveFileName = WorldSaveGameManager.Instance.DecideGameFileNameBasedOnGameSlotBeingUsed(gameSlot);
-            
+
             if (_saveFileDataWriter.CheckToSeeIfFileExists())
             {
-                // TODO: update slot info
+                var data = _saveFileDataWriter.LoadSaveFile();
+                saveDateTime.text = data.saveTimestamp;
             }
             else
             {
-                gameObject.SetActive(false);
+                saveDateTime.text = "Empty Slot";
+                // gameObject.SetActive(false);
             }
         }
-   
+
         public void LoadGameFromGameSlot()
         {
-            WorldSaveGameManager.Instance.currentGameSlotBeingUsed = gameSlot;
-            WorldSaveGameManager.Instance.LoadGame();
+            _saveFileDataWriter = new SaveFileDataWriter();
+            _saveFileDataWriter.SaveDataDirectoryPath = Application.persistentDataPath;
+            _saveFileDataWriter.SaveFileName = WorldSaveGameManager.Instance.DecideGameFileNameBasedOnGameSlotBeingUsed(gameSlot);
+
+            if (_saveFileDataWriter.CheckToSeeIfFileExists())
+            {
+                WorldSaveGameManager.Instance.currentGameSlotBeingUsed = gameSlot;
+                WorldSaveGameManager.Instance.LoadGame();
+            }
+        }
+
+        public void StartNewGameFromSlot()
+        {
+            WorldSaveGameManager.Instance.CreateNewGame(gameSlot);
         }
     }
 }

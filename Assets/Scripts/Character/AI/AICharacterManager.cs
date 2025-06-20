@@ -23,6 +23,9 @@ namespace ProjectPipe
         public AICharacterCombatManager AICharacterCombatManager { get; private set; }
         public AICharacterLocomotionManager AICharacterLocomotionManager { get; private set; }
 
+        [SerializeField] private string enemyId;
+        public string EnemyId => enemyId;
+
         // Maybe should be moved to AICharacterAnimatorManager
         private int _isMovingHash;
 
@@ -101,6 +104,51 @@ namespace ProjectPipe
             {
                 isMoving = false;
                 Animator.SetBool(_isMovingHash, false);
+            }
+        }
+        
+        public void SaveGame(ref GameSaveData gameSaveData)
+        {
+            EnemySaveData data = new EnemySaveData
+            {
+                enemyId = enemyId,
+                xPosition = transform.position.x,
+                yPosition = transform.position.y,
+                zPosition = transform.position.z,
+                xRotation = transform.rotation.x,
+                yRotation = transform.rotation.y,
+                zRotation = transform.rotation.z,
+                wRotation = transform.rotation.w,
+                currentHealth = CharacterStatsManager.CurrentHealth,
+                isDead = IsDead
+            };
+
+            gameSaveData.enemies.Add(data);
+        }
+
+        public void LoadGame(GameSaveData gameSaveData)
+        {
+            var myData = gameSaveData.enemies.Find(e => e.enemyId == enemyId);
+            if (myData == null) return;
+
+            Vector3 pos = new Vector3(myData.xPosition, myData.yPosition, myData.zPosition);
+            Quaternion rot = new Quaternion(myData.xRotation, myData.yRotation, myData.zRotation, myData.wRotation);
+
+            if (TryGetComponent<CharacterController>(out var controller))
+            {
+                controller.enabled = false;
+                transform.SetPositionAndRotation(pos, rot);
+                controller.enabled = true;
+            }
+            else
+            {
+                transform.SetPositionAndRotation(pos, rot);
+            }
+
+            CharacterStatsManager.CurrentHealth = myData.currentHealth;
+            if (myData.isDead)
+            {
+                gameObject.SetActive(false);
             }
         }
     }
