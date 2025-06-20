@@ -55,25 +55,46 @@ namespace ProjectPipe
             gameSaveData.xPosition = transform.position.x;
             gameSaveData.yPosition = transform.position.y;
             gameSaveData.zPosition = transform.position.z;
+
+            gameSaveData.xRotation = transform.rotation.x;
+            gameSaveData.yRotation = transform.rotation.y;
+            gameSaveData.zRotation = transform.rotation.z;
+            gameSaveData.wRotation = transform.rotation.w;
+
+            gameSaveData.currentHealth = PlayerStatsManager.CurrentHealth;
+            gameSaveData.currentStamina = PlayerStatsManager.CurrentStamina;
         }
 
-        public void LoadGame(ref GameSaveData gameSaveData)
+        public void LoadGame(ref GameSaveData gameSaveData, bool isNewGame)
         {
-            Vector3 myPosition = new Vector3(
-                gameSaveData.xPosition, 
-                gameSaveData.yPosition, 
+            Vector3 position = new Vector3(
+                gameSaveData.xPosition,
+                gameSaveData.yPosition,
                 gameSaveData.zPosition
             );
-            
+
+            Quaternion rotation = new Quaternion(
+                gameSaveData.xRotation,
+                gameSaveData.yRotation,
+                gameSaveData.zRotation,
+                gameSaveData.wRotation
+            );
+
             if (TryGetComponent<CharacterController>(out var controller))
             {
                 controller.enabled = false;
-                transform.position = myPosition;
+                transform.SetPositionAndRotation(position, rotation);
                 controller.enabled = true;
             }
             else
             {
-                transform.position = myPosition;
+                transform.SetPositionAndRotation(position, rotation);
+            }
+
+            if (!isNewGame)
+            {
+                PlayerStatsManager.CurrentHealth = gameSaveData.currentHealth;
+                PlayerStatsManager.CurrentStamina = gameSaveData.currentStamina;
             }
         }
     }

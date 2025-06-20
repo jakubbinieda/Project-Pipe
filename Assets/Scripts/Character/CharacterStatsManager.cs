@@ -107,5 +107,17 @@ namespace ProjectPipe
             maxHealth.Value = value;
             currentHealth.Value = value;
         }
+
+        public int CurrentHealth
+        {
+            get => currentHealth.Value;
+            set => currentHealth.Value = value;
+        }
+
+        public float CurrentStamina
+        {
+            get => currentStamina.Value;
+            set => currentStamina.Value = value;
+        }
     }
 }

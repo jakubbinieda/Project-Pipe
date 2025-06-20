@@ -38,6 +38,12 @@ namespace ProjectPipe
             Time.timeScale = 1;
         }
 
+        public void SaveGame()
+        {
+            UISoundFXManager.Instance.PlayClick();
+            WorldSaveGameManager.Instance.SaveGame();
+        }
+
         public void OpenSettings()
         {
             UISoundFXManager.Instance.PlayClick();
