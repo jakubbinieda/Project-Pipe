@@ -60,7 +60,7 @@ namespace ProjectPipe
                     Physics.IgnoreCollision(allColliders[i], allColliders[j], true);
         }
 
-        public IEnumerator ProcessDeathEvent()
+        public virtual IEnumerator ProcessDeathEvent()
         {
             IsDead = true;
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace ProjectPipe
 {
@@ -36,6 +37,17 @@ namespace ProjectPipe
             // TODO: Think of something better
             PlayerStatsManager.SetMaxStamina(100);
             PlayerStatsManager.SetMaxHealth(100);
+        }
+
+        public override IEnumerator ProcessDeathEvent()
+        {
+            PlayerUIManager.Instance.PlayerUIPopUpManager.SendYouDiedPopUp();
+
+            yield return base.ProcessDeathEvent();
+
+            yield return new WaitForSeconds(3f);
+
+            WorldSaveGameManager.Instance.BackToMainMenu();
         }
 
         public void SaveGame(ref GameSaveData gameSaveData)
