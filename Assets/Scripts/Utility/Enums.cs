@@ -31,4 +31,10 @@ namespace ProjectPipe
         GameSlot_02,
         GameSlot_03
     }
+
+    public enum IdleStateMode
+    {
+        Idle,
+        Patrol,
+    }
 }

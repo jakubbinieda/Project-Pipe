@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectPipe
@@ -10,6 +11,9 @@ namespace ProjectPipe
         [field: SerializeField] public LayerMask CharacterLayers;
         [field: SerializeField] public LayerMask EnvironmentLayers;
         [field: SerializeField] public LayerMask AILayers;
+        
+        [field: Header("Patrol Paths")]
+        [field: SerializeField] List<AIPatrolPath> PatrolPaths = new List<AIPatrolPath>();
 
         private void Awake()
         {
@@ -33,6 +37,28 @@ namespace ProjectPipe
                 viewableAnge = -viewableAnge;
             }
             return viewableAnge;
+        }
+        
+        public void AddPatrolPath(AIPatrolPath path)
+        {
+            if (!PatrolPaths.Contains(path))
+            {
+                PatrolPaths.Add(path);
+            }
+        }
+        
+        public AIPatrolPath GetPatrolPathByIndex(int index)
+        {
+            AIPatrolPath path = null;
+            for (int i = 0; i < PatrolPaths.Count; i++)
+            {
+                Debug.Log(PatrolPaths[i].patrolPathIndex);
+                if (PatrolPaths[i].patrolPathIndex == index)
+                {
+                    path = PatrolPaths[i];
+                }
+            }
+            return path;
         }
     }
 }
