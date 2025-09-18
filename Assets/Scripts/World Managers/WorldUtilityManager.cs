@@ -24,7 +24,7 @@ namespace ProjectPipe
             }
 
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
 
         public float GetAngleOfTarget(Transform characterTransform, Vector3 targetsDirection)

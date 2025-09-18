@@ -8,7 +8,7 @@ namespace ProjectPipe
         public Toggle fullscreenToggle;
         public Slider mouseSensitivitySlider;
         public Slider musicVolumeSlider;
-
+        
         private void Start()
         {
             var settings = WorldSettingsManager.Instance;
@@ -34,6 +34,7 @@ namespace ProjectPipe
             UISoundFXManager.Instance.PlayClick();
             WorldSettingsManager.Instance.SetMusicVolume(value);
         }
+        
     }
 }
 
